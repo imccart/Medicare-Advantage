@@ -8,5 +8,5 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
 1. [Service Area Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-Contract-Service-Area-by-State-County.html)
 
-   The MA Contract Service Area files provide a list contracts and the counties in which the contracts are approved to operate. The files are available monthly. I typically use the January files to identify the set of contracts approved as of the start of the calendar year.
+   The MA Contract Service Area files provide a list of contracts and the counties in which the contracts are approved to operate. The files are available monthly. I typically use the January files to identify the set of contracts approved as of the start of the calendar year.
 
