@@ -4,7 +4,6 @@ global DATA_FINAL "C:\..." ## Folder to save intermediate and final datasets cre
 global STATA_CODE "C:\..." ## Location of code files
 global DATA_MA "C:\..."  ## Raw MA data files
 global DATA_FFS "C:\..." ## Raw Medicare FFS data files
-global DATA_MSA "D:\CloudStation\Professional\Research Data\Zip and MSA\"
 
 ** Initiate log file to save all runs of the do files
 set more off
