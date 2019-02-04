@@ -6,9 +6,12 @@ All of the raw data are publicly available from the Centers for Medicare and Med
 
 Below, I introduce files in the order in which I've found things to be easiest to work with, but there's no magic order that needs to be followed. 
 
-1. [Service Area Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-Contract-Service-Area-by-State-County.html)
+1. [Monthly Plan Enrollment Data](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/Monthly-Enrollment-by-Contract-Plan-State-County.html)
+
+   The monthly enrollment data by contract/plan/state/county (CPSC) are the most comprehensive enrollment files and show plan-level enrollments each month. Consistent with CMS data restrictions, the data are only provided for plans and months in which at least 11 beneficiaries enrolled in the plan. In all other cases, the enrollment data are indicated as missing.
+
+3. [Service Area Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-Contract-Service-Area-by-State-County.html)
 
    The MA Contract Service Area files provide a list of contracts and the counties in which the contracts are approved to operate. The files are available monthly. I typically use the January files to identify the set of contracts approved as of the start of the calendar year.
    
-2. 
 
