@@ -10,7 +10,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
    The monthly enrollment data by contract/plan/state/county (CPSC) are the most comprehensive enrollment files, providingplan-level enrollments each month. Consistent with CMS data restrictions, the data are only provided for plans and months in which at least 11 beneficiaries enrolled in the plan. In all other cases, the enrollment data are indicated as missing.
    
-   Stata .do file to organize CPSC enrollment data is available here: [1_Plan_Data.do](Medicare-Advantage/stata_code/1_Plan_Data.do)
+   Stata .do file to organize CPSC enrollment data is available here: [1_Plan_Data.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/1_Plan_Data.do)
 
 2. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/)
 
