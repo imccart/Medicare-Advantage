@@ -53,4 +53,4 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
    CMS also publishes average fee-for-service (FFS) costs for each county, which is sometimes useful as a proxy for insurer's costs in MA (although the patient population remains very different between Traditional Medicare FFS and Medicare Advantage).
    
-   Sata .do file to organize the CMS FFS costs data is coming shortly.
+   Stata .do file to organize the CMS FFS costs data is coming shortly.
