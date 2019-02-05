@@ -1,7 +1,10 @@
 # Medicare Advantage
 This describes all of my primary Medicare Advantage (MA) datasets and code files. Project-specific uses of these data are treated as their own repositories and will be cited here over time. As always, this is a living document and changes regularly.
 
-# Raw Data Sources
+## Master Do File
+Each of the relevant data sources are available individually and discussed in more detail below. Just scroll down to the [Raw Data Sources][#Raw Data Sources]. All of these files can also be called as part of a master file, [_BuildFinalData.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/_BuildFinalData.do). I name these files so that they appear (by default) in Windows folders in a way that makes sense to me. So the master do file begins with an underscore, and the individual do files are numbered. This is just personal preference but helps me to keep things in order.
+
+## Raw Data Sources
 All of the raw data are publicly available from the Centers for Medicare and Medicaid Services (CMS) website, although navigating the different pages can be cumbersome. There is more information available than what I discuss here, but this is sufficient to create a panel of MA plans/contracts/insurers by county over several years, complete with plan characteristics, quality ratings, and plan enrollments.
 
 Below, I introduce files in the order in which I've found things to be easiest to work with, but there's no magic order that needs to be followed. 
