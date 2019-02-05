@@ -26,7 +26,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
 4. [Penetration Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-State-County-Penetration.html)
 
-   The MA penetration files provide the overall MA share for each county and month. These data are useful since plan-level enrollments are masked for plans with too few enrollees. As such, summing the plan-level enrollments will always underestimate the total number of MA enrollees in a county. The MA penetration files therefore provide a direct measure of the size of the MA market in each county.
+   The MA penetration files provide the overall MA share for each county and month. These data are useful since plan-level enrollments are masked for plans with too few enrollees. As such, summing the plan-level enrollments will always underestimate the total number of MA enrollees in a county. The MA penetration files therefore provide a direct measure of the size of the MA market in each county. Note that these data are only available from CMS beginning in 2008.
    
    Stata .do file to organize the penetration files is available here: [4_Penetration_Files.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/4_Penetration_Files.do)
    

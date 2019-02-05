@@ -1,6 +1,23 @@
 ***********************************************************************************
 /* Read in enrollment data */
 ***********************************************************************************
+*************************************************************************
+** Set local "month lists" to identify different files relevant for each year
+/* Month lists differ by year just in case you work with data that are only available
+   in a fraction of a year, which often happens for new data as new monthly releases
+   are made. Some data sources are also only available in certain years.  */
+*************************************************************************
+loc monthlist_2006 "07 08 09 10 11 12"
+loc monthlist_2007 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2008 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2009 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2010 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2011 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2012 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2013 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2014 "01 02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2015 "01 02 03 04 05 06 07 08 09 10 11 12"
+
 forvalues y=2006(1)2015 {
   foreach m of loc monthlist_`y' {
 
@@ -40,6 +57,17 @@ forvalues y=2006(1)2015 {
 ***********************************************************************************
 ** Append monthly files for each year
 ***********************************************************************************
+loc monthlist_2006 "08 09 10 11 12"
+loc monthlist_2007 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2008 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2009 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2010 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2011 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2012 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2013 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2014 "02 03 04 05 06 07 08 09 10 11 12"
+loc monthlist_2015 "02 03 04 05 06 07 08 09 10 11 12"
+
 use temp_merge_2006_07, clear
 gen month="07"
 foreach m of loc monthlist_2006 {
