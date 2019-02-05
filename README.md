@@ -22,7 +22,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
    The MA Contract Service Area files provide a list of contracts and the counties in which the contracts are approved to operate. Contracts may have enrollees in counties for which the contract is not approved due, for example, to beneficiaries that moved from one county to another and maintained their old plan. The files are available monthly. I usually look across months in a year for any month in which a contract was approved. If such a month exists, then I flag that contract/county as "approved" and ultimately merge those approved contract/counties with other plan-level data.
    
-   Stata .do file to organize the service area files is available here: [3_Service_Areas.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/3_Serivce_Areas.do)
+   Stata .do file to organize the service area files is available here: [3_Service_Areas.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/3_Service_Areas.do)
    
 4. [Penetration Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-State-County-Penetration.html)
 
@@ -42,3 +42,15 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
    Stata .do file to organize the CMS payment and rebate data is available here:
    [6_Risk_Rebates.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/6_Risk_Rebates.do)
+   
+7. [MA Benchmark Rates](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Ratebooks-and-Supporting-Data.html)
+
+   CMS sets benchmarks for each county, to which plan bids are assessed when determining final premiums. These benchmark formulas are adjusted regularly but are legislatively defined. Details of the benchmarks and underlying data are available at the link above.
+   
+   Stata .do file to organize the benchmark rates is available here: [7_MA_Benchmark.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/7_MA_Benchmark.do)
+   
+8. [CMS Fee-for-service Costs](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/FFS-Data.html)
+
+   CMS also publishes average fee-for-service (FFS) costs for each county, which is sometimes useful as a proxy for insurer's costs in MA (although the patient population remains very different between Traditional Medicare FFS and Medicare Advantage).
+   
+   Sata .do file to organize the CMS FFS costs data is coming shortly.
