@@ -30,5 +30,15 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
    Stata .do file to organize the penetration files is available here: [4_Penetration_Files.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/4_Penetration_Files.do)
    
-   
+5. [Star Ratings](https://www.cms.gov/medicare/prescription-drug-coverage/prescriptiondrugcovgenin/performancedata.html)
 
+   The MA star ratings data are available as part of the Part C and D Performance Data. The data are not in a good analytical format and the variable names differ over time. In the associated code files, I've renamed variables so that sufficiently similar data are given the same name across all years of data.
+   
+   Stata .do file to organize the star ratings data is available here: [5_Star_Ratings.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/5_Star_Ratings.do)
+
+6. [CMS Payment Data](https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/Plan-Payment-Data.html)
+
+   CMS pays MA plans based on their bid and the county-level benchmarks. The final risk-adjusted payments (per beneficiary) are available on the CMS website. Unfortunately, the most recent data available are from 2015.
+   
+   Stata .do file to organize the CMS payment and rebate data is available here:
+   [6_Risk_Rebates.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/6_Risk_Rebates.do)
