@@ -17,7 +17,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
 2. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/)
 
-   The MA Landscape Files provide data on several plan characteristics. Note that there are separate folders for stand-along prescription drug plans (PDPs), special needs plans (SNPs), MA plans, and MA+PD plans. The accompanying code files focus only on MA and MA+PD plans.
+   The MA Landscape Files provide data on several plan characteristics. Note that there are separate folders for stand-along prescription drug plans (PDPs), special needs plans (SNPs), MA plans, and MA+PD plans. The accompanying code files focus only on MA and MA+PD plans. Also note that another source for similar information is in the Plan Benefits Data files. Those files are more comprehensive but also significantly harder to work with. I've found the landscape files to have all of the most important information, as well as being much more accessible.
    
    Stata .do file to organize plan premiums and other characteristics is available here: [2_Plan_Characteristics.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/2_Plan_Characteristics.do)
 
@@ -41,7 +41,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
 6. [CMS Payment Data](https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/Plan-Payment-Data.html)
 
-   CMS pays MA plans based on their bid and the county-level benchmarks. The final risk-adjusted payments (per beneficiary) are available on the CMS website. Unfortunately, the most recent data available are from 2015.
+   CMS pays MA plans based on their bid and the county-level benchmarks. The final risk-adjusted payments (per beneficiary) are available on the CMS website. Unfortunately, the most recent data available are from 2015. Hopefully CMS will publish the 2016 and 2017 data soon.
    
    Stata .do file to organize the CMS payment and rebate data is available here:
    [6_Risk_Rebates.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/6_Risk_Rebates.do)
@@ -54,6 +54,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
 8. [CMS Fee-for-service Costs](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/FFS-Data.html)
 
-   CMS also publishes average fee-for-service (FFS) costs for each county, which is sometimes useful as a proxy for insurer's costs in MA (although the patient population remains very different between Traditional Medicare FFS and Medicare Advantage).
+   CMS also publishes average fee-for-service (FFS) costs for each county, which is sometimes useful as a proxy for insurer's costs in MA (although the patient population remains very different between Traditional Medicare FFS and Medicare Advantage). Data specifically on the 65+ population was available through 2014, but CMS now only provides the combined "aged" and disabled enrollment and reimbursement figures. Due to the change in data from 2014 to 2015, I use the total (aged+disabled) enrollment and reimbursement figures when working with data that spans before and after 2015.
    
-   Stata .do file to organize the CMS FFS costs data is coming shortly.
+   Stata .do file to organize the CMS FFS cost data is available here:
+   [8_FFS_Costs.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/8_FFS_Costs.do)

@@ -568,14 +568,14 @@ use temp_planall_2007, clear
 forvalues y=2008(1)2015 {
   append using temp_planall_`y'
 }
-foreach x of varlist monthlyconsolidatedpremium {
-  split `x', parse("$")
-  replace `x'=""
-  replace `x'=`x'1 if `x'1!="" & `x'1!="-"
-  replace `x'=`x'2 if `x'2!="" & `x'2!="-"
-  replace `x'="0" if `x'=="" & (`x'1=="-" | `x'2=="-")
-  destring `x', replace
-  drop `x'1 `x'2
-}
+
+split monthlyconsolidatedpremium, parse("$")
+replace monthlyconsolidatedpremium=""
+replace monthlyconsolidatedpremium=monthlyconsolidatedpremium1 if monthlyconsolidatedpremium1!="" & monthlyconsolidatedpremium1!="-"
+replace monthlyconsolidatedpremium=monthlyconsolidatedpremium2 if monthlyconsolidatedpremium2!="" & monthlyconsolidatedpremium2!="-"
+replace monthlyconsolidatedpremium="0" if monthlyconsolidatedpremium=="" & (monthlyconsolidatedpremium1=="-" | monthlyconsolidatedpremium2=="-")
+destring monthlyconsolidatedpremium, replace
+drop monthlyconsolidatedpremium1 monthlyconsolidatedpremium2
+  
 rename monthlyconsolidatedpremium Premium
 save "${DATA_FINAL}Plan_Premiums.dta", replace

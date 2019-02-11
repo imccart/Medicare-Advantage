@@ -38,6 +38,7 @@ loc monthlist_2014 "02 03 04 05 06 07 08 09 10 11 12"
 loc monthlist_2015 "02 03 04 05 06 07 08 09 10 11 12"
 
 use temp_pen_2008_06, clear
+gen month="06"
 foreach m of loc monthlist_2008 {
   append using temp_pen_2008_`m', force
   replace month="`m'" if month==""
