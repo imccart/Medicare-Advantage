@@ -1,3 +1,99 @@
+#########################################################################
+## Read in raw data
+#########################################################################  
+
+## 2007 Files
+ma.path=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2007 MA Landscape Source File 11-16-06.csv",sep="")
+landscape.data=read.csv(ma.path,skip=4,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","drug_premium","drug_deductible",
+                                                                          "drug_type","gap_coverage","variable_drug_copay","drug_type_detail","demo_type","contractid",
+                                                                          "planid","segmentid"))
+
+
+
+
+import delimited using ///
+  "${DATA_MA}MA Plan Characteristics\Extracted Data\2007 MA Landscape Source File 11-16-06.csv", ///
+  delimiters(",") varnames(4) stripquotes(yes) clear
+keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
+gen year=2007  
+bys contractid planid state county: gen obs=_N
+keep if obs==1
+drop obs
+save temp_plan_2007, replace
+
+import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2007\Medicare Part D 2007 Plan Report 12-06-06.xls", firstrow cellrange(A4:AC49252) clear
+rename PartCPremium3 Premium_PartC
+rename PartDBasicPremium4 Premium_PartD_Basic
+rename PartDSupplementalPremium5 Premium_PartD_Supplemental
+rename PartDTotalPremium6 Premium_PartD_Total
+rename PartDDrugDeductible PartD_Deductible
+rename ContractID contractid 
+rename PlanID planid
+rename State state
+rename County county
+keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
+gen year=2007
+bys contractid planid state county: gen obs=_N
+keep if obs==1
+drop obs
+destring planid, replace
+save temp_plancd_2007, replace
+
+
+
+******************************************
+  ** 2008 files
+import delimited using ///
+  "${DATA_MA}MA Plan Characteristics\Extracted Data\2008LandscapeSourceData_MA_09_25_07(A-M).csv", ///
+  delimiters(",") varnames(5) stripquotes(yes) clear
+keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
+gen year=2008
+save temp_plan_2008a, replace
+
+import delimited using ///
+  "${DATA_MA}MA Plan Characteristics\Extracted Data\2008LandscapeSourceData_MA_09_25_07(N-W).csv", ///
+  delimiters(",") varnames(5) stripquotes(yes) clear
+keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
+gen year=2008
+save temp_plan_2008b, replace
+
+use temp_plan_2008a, clear
+append using temp_plan_2008b
+bys contractid planid state county: gen obs=_N
+keep if obs==1
+drop obs
+save temp_plan_2008, replace
+
+
+import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2008\Medicare Part D 2008 Plan Report 11-06-07.xls", sheet("Alabama to Montana") firstrow cellrange(A4:AC39471) clear
+rename PartCPremium3 Premium_PartC
+rename PartDBasicPremium4 Premium_PartD_Basic
+rename PartDSupplementalPremium5 Premium_PartD_Supplemental
+rename PartDTotalPremium6 Premium_PartD_Total
+rename PartDDrugDeductible PartD_Deductible
+rename ContractID contractid 
+rename PlanID planid
+rename State state
+rename County county
+keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
+gen year=2008
+save temp_plancd_2008a, replace
+
+
+import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2008\Medicare Part D 2008 Plan Report 11-06-07.xls", sheet("Nebraska to Wyoming") firstrow cellrange(A4:AC44708) clear
+rename PartCPremium3 Premium_PartC
+rename PartDBasicPremium4 Premium_PartD_Basic
+rename PartDSupplementalPremium5 Premium_PartD_Supplemental
+rename PartDTotalPremium6 Premium_PartD_Total
+rename PartDDrugDeductible PartD_Deductible
+rename ContractID contractid 
+rename PlanID planid
+rename State state
+rename County county
+keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
+gen year=2008
+save temp_plancd_2008b, replace
+
 use temp_plancd_2008a, clear
 append using temp_plancd_2008b
 bys contractid planid state county: gen obs=_N
