@@ -8,6 +8,8 @@ landscape.data=read.csv(ma.path,skip=4,stringsAsFactors=FALSE,col.names=c("state
                                                                           "drug_type","gap_coverage","variable_drug_copay","drug_type_detail","demo_type","contractid",
                                                                           "planid","segmentid"))
 
+landscape.data = landscape.data %>%
+  group_by(contractid planid state county) %>%
 
 
 
