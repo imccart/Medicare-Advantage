@@ -1,170 +1,155 @@
 #########################################################################
-## Read in raw data
+## Read and clean data
 #########################################################################  
 
-## 2007 Files
-ma.path=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2007 MA Landscape Source File 11-16-06.csv",sep="")
-landscape.data=read.csv(ma.path,skip=4,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","drug_premium","drug_deductible",
+## Raw 2007 data
+ma.path.2007=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2007 MA Landscape Source File 11-16-06.csv",sep="")
+ma.data.2007=read.csv(ma.path.2007,skip=4,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","drug_premium","partd_deductible",
                                                                           "drug_type","gap_coverage","variable_drug_copay","drug_type_detail","demo_type","contractid",
                                                                           "planid","segmentid"))
 
-landscape.data = landscape.data %>%
-  group_by(contractid planid state county) %>%
+macd.path.2007=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2007\\Medicare Part D 2007 Plan Report 12-06-06.xls",sep="")
+macd.data.2007=read_xls(macd.path.2007,range="A5:AC49252",col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
+                                                                   "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
+                                                                   "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
+                                                                   "premium_partd_basic","premium_partd_supp","premium_partd_total",
+                                                                   "pard_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
+                                                                   "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
 
 
 
-import delimited using ///
-  "${DATA_MA}MA Plan Characteristics\Extracted Data\2007 MA Landscape Source File 11-16-06.csv", ///
-  delimiters(",") varnames(4) stripquotes(yes) clear
-keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
-gen year=2007  
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-save temp_plan_2007, replace
+## Raw 2008 data
+ma.path.2008a=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(A-M).csv",sep="")
+ma.data.2008a=read.csv(ma.path.2008a,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
+                                                                        "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
+                                                                        "planid","segmentid"))
 
-import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2007\Medicare Part D 2007 Plan Report 12-06-06.xls", firstrow cellrange(A4:AC49252) clear
-rename PartCPremium3 Premium_PartC
-rename PartDBasicPremium4 Premium_PartD_Basic
-rename PartDSupplementalPremium5 Premium_PartD_Supplemental
-rename PartDTotalPremium6 Premium_PartD_Total
-rename PartDDrugDeductible PartD_Deductible
-rename ContractID contractid 
-rename PlanID planid
-rename State state
-rename County county
-keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
-gen year=2007
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-destring planid, replace
-save temp_plancd_2007, replace
+ma.path.2008b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(N-W).csv",sep="")
+ma.data.2008b=read.csv(ma.path.2008b,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
+                                                                               "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
+                                                                               "planid","segmentid"))
+
+ma.data.2008 = rbind(ma.data.2008a,ma.data.2008b)
 
 
+macd.path.2008a=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2008\\Medicare Part D 2008 Plan Report 11-06-07.xls",sep="")
+macd.data.2008a=read_xls(macd.path.2008a,range="A5:AC39471",sheet="Alabama to Montana",col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
+                                                                 "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
+                                                                 "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
+                                                                 "premium_partd_basic","premium_partd_supp","premium_partd_total",
+                                                                 "pard_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
+                                                                 "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
 
-******************************************
-  ** 2008 files
-import delimited using ///
-  "${DATA_MA}MA Plan Characteristics\Extracted Data\2008LandscapeSourceData_MA_09_25_07(A-M).csv", ///
-  delimiters(",") varnames(5) stripquotes(yes) clear
-keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
-gen year=2008
-save temp_plan_2008a, replace
+macd.path.2008b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2008\\Medicare Part D 2008 Plan Report 11-06-07.xls",sep="")
+macd.data.2008b=read_xls(macd.path.2008b,range="A5:AC44708",sheet="Nebraska to Wyoming",col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
+                                                                                                   "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
+                                                                                                   "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
+                                                                                                   "premium_partd_basic","premium_partd_supp","premium_partd_total",
+                                                                                                   "pard_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
+                                                                                                   "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
 
-import delimited using ///
-  "${DATA_MA}MA Plan Characteristics\Extracted Data\2008LandscapeSourceData_MA_09_25_07(N-W).csv", ///
-  delimiters(",") varnames(5) stripquotes(yes) clear
-keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium
-gen year=2008
-save temp_plan_2008b, replace
-
-use temp_plan_2008a, clear
-append using temp_plan_2008b
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-save temp_plan_2008, replace
+macd.data.2008 = rbind(macd.data.2008a,macd.data.2008b)
 
 
-import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2008\Medicare Part D 2008 Plan Report 11-06-07.xls", sheet("Alabama to Montana") firstrow cellrange(A4:AC39471) clear
-rename PartCPremium3 Premium_PartC
-rename PartDBasicPremium4 Premium_PartD_Basic
-rename PartDSupplementalPremium5 Premium_PartD_Supplemental
-rename PartDTotalPremium6 Premium_PartD_Total
-rename PartDDrugDeductible PartD_Deductible
-rename ContractID contractid 
-rename PlanID planid
-rename State state
-rename County county
-keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
-gen year=2008
-save temp_plancd_2008a, replace
+
+## Raw 2009 data
+ma.path.2009a=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2009LandscapeSourceData_MA_11_05_08_A_to_M.csv",sep="")
+ma.data.2009a=read.csv(ma.path.2009a,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
+                                                                               "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
+                                                                               "planid","segmentid"))
+
+ma.path.2009b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2009LandscapeSourceData_MA_11_05_08_N_to_W.csv",sep="")
+ma.data.2009b=read.csv(ma.path.2009b,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
+                                                                               "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
+                                                                               "planid","segmentid"))
+ma.data.2009 = rbind(ma.data.2009a,ma.data.2009b)
 
 
-import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2008\Medicare Part D 2008 Plan Report 11-06-07.xls", sheet("Nebraska to Wyoming") firstrow cellrange(A4:AC44708) clear
-rename PartCPremium3 Premium_PartC
-rename PartDBasicPremium4 Premium_PartD_Basic
-rename PartDSupplementalPremium5 Premium_PartD_Supplemental
-rename PartDTotalPremium6 Premium_PartD_Total
-rename PartDDrugDeductible PartD_Deductible
-rename ContractID contractid 
-rename PlanID planid
-rename State state
-rename County county
-keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
-gen year=2008
-save temp_plancd_2008b, replace
-
-use temp_plancd_2008a, clear
-append using temp_plancd_2008b
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-destring planid, replace
-save temp_plancd_2008, replace
+macd.path.2009a=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2009\\Medicare Part D 2009 Plan Report 11-03-08.xls",sep="")
+macd.data.2009a=read_xls(macd.path.2009a,range="A5:AB33304",sheet="Alabama to Montana",col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
+                                                                                                   "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
+                                                                                                   "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
+                                                                                                   "premium_partd_basic","premium_partd_supp","premium_partd_total",
+                                                                                                   "pard_assist_full","partd_assist_75","partd_assist_50","partd_assist_25",
+                                                                                                   "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
 
 
-******************************************
-  ** 2009 files
-import delimited using ///
-  "${DATA_MA}MA Plan Characteristics\Extracted Data\2009LandscapeSourceData_MA_11_05_08_A_to_M.csv", ///
-  delimiters(",") varnames(5) stripquotes(yes) clear
-keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium  
-gen year=2009
-save temp_plan_2009a, replace
-
-import delimited using ///
-  "${DATA_MA}MA Plan Characteristics\Extracted Data\2009LandscapeSourceData_MA_11_05_08_N_to_W.csv", ///
-  delimiters(",") varnames(5) stripquotes(yes) clear
-keep contractid planid state county typeofmedicarehealthplan monthlyconsolidatedpremium  
-gen year=2009
-save temp_plan_2009b, replace
-
-use temp_plan_2009a, clear
-append using temp_plan_2009b
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-save temp_plan_2009, replace
+macd.path.2009b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2009\\Medicare Part D 2009 Plan Report 11-03-08.xls",sep="")
+macd.data.2009b=read_xls(macd.path.2009b,range="A5:AB40219",sheet="Nebraska to Wyoming",col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
+                                                                                                    "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
+                                                                                                    "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
+                                                                                                    "premium_partd_basic","premium_partd_supp","premium_partd_total",
+                                                                                                    "pard_assist_full","partd_assist_75","partd_assist_50","partd_assist_25",
+                                                                                                    "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
+macd.data.2009 = rbind(macd.data.2009a,macd.data.2009b)
 
 
-import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2009\Medicare Part D 2009 Plan Report 11-03-08.xls", sheet("Alabama to Montana") firstrow cellrange(A4:AB33304) clear
-rename PartCPremium3 Premium_PartC
-rename PartDBasicPremium4 Premium_PartD_Basic
-rename PartDSupplementalPremium5 Premium_PartD_Supplemental
-rename PartDTotalPremium6 Premium_PartD_Total
-rename PartDDrugDeductible PartD_Deductible
-rename ContractID contractid 
-rename PlanID planid
-rename State state
-rename County county
-keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
-gen year=2009
-save temp_plancd_2009a, replace
 
 
-import excel using "${DATA_MA}MA Plan Characteristics\Extracted Data\PartCD\2009\Medicare Part D 2009 Plan Report 11-03-08.xls", sheet("Nebraska to Wyoming") firstrow cellrange(A4:AB40219) clear
-rename PartCPremium3 Premium_PartC
-rename PartDBasicPremium4 Premium_PartD_Basic
-rename PartDSupplementalPremium5 Premium_PartD_Supplemental
-rename PartDTotalPremium6 Premium_PartD_Total
-rename PartDDrugDeductible PartD_Deductible
-rename ContractID contractid 
-rename PlanID planid
-rename State state
-rename County county
-keep contractid planid state county Premium_PartC Premium_PartD_Basic Premium_PartD_Supplemental Premium_PartD_Total PartD_Deductible
-gen year=2009
-save temp_plancd_2009b, replace
+## Raw 2010 data
 
-use temp_plancd_2009a, clear
-append using temp_plancd_2009b
-bys contractid planid state county: gen obs=_N
-keep if obs==1
-drop obs
-destring planid, replace
-save temp_plancd_2009, replace
+
+
+
+
+############ CLEAN MA-Only Data #####################
+## Remove dollar signs and assign as numeric variables
+ma.data = ma.data %>%
+  mutate(premium=as.numeric(str_replace_all(premium,'\\$',''))) %>%
+  mutate(drug_premium=as.numeric(str_replace_all(drug_premium,'\\$',''))) %>%
+  mutate(partd_deductible=as.numeric(str_replace_all(partd_deductible,'\\$',''))) %>%
+  mutate(variable_drug_copay=as.numeric(str_replace_all(variable_drug_copay,'\\$','')))
+
+
+## Fill in missing plan info (by contract, plan, state, and county)
+ma.data = ma.data %>%
+  group_by(contractid, planid, state, county) %>%
+  fill(premium, drug_premium, partd_deductible, variable_drug_copay, plan_name, 
+       plan_type, drug_type, gap_coverage, drug_type_detail, demo_type)
+
+## Fill in missing contract info (by contract, state, county)
+ma.data = ma.data %>%
+  group_by(contractid, state, county) %>%
+  fill(org_name)
+
+## Remove duplicates
+ma.2007 = ma.data %>%
+  group_by(contractid, planid, state, county) %>%
+  mutate(id_count=row_number())
+
+ma.2007 = ma.2007 %>%
+  filter(id_count==1) %>%
+  select(-id_count)
+
+  
+############ CLEAN MA-PD Data #####################
+macd.data = macd.data %>% 
+  select(contractid, planid, state, county, premium_partc, premium_partd_basic, 
+         premium_partd_supp, premium_partd_total, partd_deductible)
+
+macd.data = macd.data %>%
+  group_by(contractid, planid, state, county) %>%
+  fill(premium_partc, premium_partd_basic, premium_partd_supp, premium_partd_total, partd_deductible)
+
+## Remove duplicates
+macd.2007 = macd.data %>%
+  group_by(contractid, planid, state, county) %>%
+  mutate(id_count=row_number())
+
+macd.2007 = macd.2007 %>%
+  filter(id_count==1) %>%
+  select(-id_count)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
