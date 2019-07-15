@@ -332,39 +332,36 @@ macd.data.2015 = rbind(macd.data.2015a,macd.data.2015b)
 
 
 for (y in 2007:2015) {
+
   ############ CLEAN MA-Only Data #####################
-  ## Remove dollar signs and assign as numeric variables
   ma.data=get(paste("ma.data.",y,sep=""))
   ma.data = ma.data %>%
-    mutate(premium=as.numeric(str_replace_all(premium,'\\$',''))) %>%
-    mutate(drug_premium=as.numeric(str_replace_all(drug_premium,'\\$',''))) %>%
-    mutate(partd_deductible=as.numeric(str_replace_all(partd_deductible,'\\$',''))) %>%
-    mutate(moop=as.numeric(str_replace_all(moop,'\\$','')))
+    mutate(planid=as.numeric(planid)) %>%
+    select(contractid, planid, state, county, premium)
 
+  ## Remove dollar signs and assign as numeric variables
+  ma.data = ma.data %>%
+    mutate(premium=as.numeric(str_replace_all(premium,'\\$','')))
 
   ## Fill in missing plan info (by contract, plan, state, and county)
   ma.data = ma.data %>%
     group_by(contractid, planid, state, county) %>%
-    fill(premium, drug_premium, partd_deductible, variable_drug_copay, plan_name, 
-         plan_type, drug_type, gap_coverage, drug_type_detail, demo_type)
+    fill(premium)
 
-  ## Fill in missing contract info (by contract, state, county)
-  ma.data = ma.data %>%
-    group_by(contractid, state, county) %>%
-    fill(org_name)
-  
   ## Remove duplicates
-  ma.2007 = ma.data %>%
+  ma.data = ma.data %>%
     group_by(contractid, planid, state, county) %>%
     mutate(id_count=row_number())
   
-  ma.2007 = ma.2007 %>%
+  ma.data = ma.data %>%
     filter(id_count==1) %>%
     select(-id_count)
-  
+
     
   ############ CLEAN MA-PD Data #####################
+  macd.data=get(paste("macd.data.",y,sep=""))
   macd.data = macd.data %>% 
+    mutate(planid=as.numeric(planid)) %>%
     select(contractid, planid, state, county, premium_partc, premium_partd_basic, 
            premium_partd_supp, premium_partd_total, partd_deductible)
   
@@ -373,45 +370,26 @@ for (y in 2007:2015) {
     fill(premium_partc, premium_partd_basic, premium_partd_supp, premium_partd_total, partd_deductible)
   
   ## Remove duplicates
-  macd.2007 = macd.data %>%
+  macd.data = macd.data %>%
     group_by(contractid, planid, state, county) %>%
     mutate(id_count=row_number())
   
-  macd.2007 = macd.2007 %>%
+  macd.data = macd.data %>%
     filter(id_count==1) %>%
     select(-id_count)
 
-}
-
-
-
-
-
-
-
-
-
-***********************************************************************************
-  /* Append yearly datasets and clean */
-  ***********************************************************************************
-  forvalues t=2007(1)2015 {
-    use temp_plan_`t', clear
-  merge 1:1 contractid planid state county using temp_plancd_`t', nogenerate
-    save temp_planall_`t', replace
-}
-
-use temp_planall_2007, clear
-forvalues y=2008(1)2015 {
-  append using temp_planall_`y'
+  ## Merge Part D info to Part C info
+  ma.macd.data = ma.data %>%
+    left_join(macd.data, by=c("contractid", "planid", "state", "county")) %>%
+    mutate(year=y)
+  
+  if (y==2007) {
+    plan.premiums=ma.macd.data
+  } else {
+    plan.premiums=rbind(plan.premiums,ma.macd.data)
   }
+  
+  
+}
 
-split monthlyconsolidatedpremium, parse("$")
-replace monthlyconsolidatedpremium=""
-replace monthlyconsolidatedpremium=monthlyconsolidatedpremium1 if monthlyconsolidatedpremium1!="" & monthlyconsolidatedpremium1!="-"
-replace monthlyconsolidatedpremium=monthlyconsolidatedpremium2 if monthlyconsolidatedpremium2!="" & monthlyconsolidatedpremium2!="-"
-replace monthlyconsolidatedpremium="0" if monthlyconsolidatedpremium=="" & (monthlyconsolidatedpremium1=="-" | monthlyconsolidatedpremium2=="-")
-destring monthlyconsolidatedpremium, replace
-drop monthlyconsolidatedpremium1 monthlyconsolidatedpremium2
-
-rename monthlyconsolidatedpremium Premium
-save "${DATA_FINAL}Plan_Premiums.dta", replace
+write_tsv(plan.premiums,path=paste(path.data.final,"\\Plan_Premiums.txt",sep=""),append=FALSE,col_names=TRUE)
