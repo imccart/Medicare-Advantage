@@ -1,5 +1,5 @@
 #########################################################################
-## Read and clean data
+## Read and clean data basic premium and deductible information
 #########################################################################  
 
 ## Raw 2007 data
