@@ -7,7 +7,7 @@
 
 ## 2008 Rating variable names
 rating.vars.2008=c("contractid",
-                   "contractname",
+                   "org_name",
                    "breastcancer_screen",
                    "rectalcancer_screen",
                    "cv_cholscreen",
@@ -40,7 +40,11 @@ rating.vars.2008=c("contractid",
                    "new_contract")
 
 ## 2009 Rating variable names
-rating.vars.2009=c("breastcancer_screen",
+rating.vars.2009=c("contractid",
+                   "org_type",
+                   "org_name",
+                   "org_marketing",
+                   "breastcancer_screen",
                    "rectalcancer_screen",
                    "cv_cholscreen",
                    "diabetes_cholscreen",

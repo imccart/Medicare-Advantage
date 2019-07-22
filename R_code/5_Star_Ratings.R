@@ -4,16 +4,23 @@
 source(paste(path.code,"\\rating_variables.R",sep=""),local=TRUE,echo=FALSE)
 
 ## Assign yearly datasets
-ma.path.2008=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
-star.data.2008=read_csv(ma.path.2008,skip=4,col_names=rating.vars.2008)
+ma.path.2008a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
+star.data.2008a=read.csv(ma.path.2008a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2008)
 
-star.data.2008=read.csv(ma.path.2008,skip=3,stringsAsFactors=FALSE)
+ma.path.2008b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv",sep="")
+star.data.2008b=read.csv(ma.path.2008b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contract_id","org_name","healthy","getting_care",
+                                     "timely_care","chronic","appeal","new_contract"))
 
 
-ma.path.2008b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(N-W).csv",sep="")
-ma.data.2008b=read.csv(ma.path.2008b,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
-                                                                               "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                                                               "planid","segmentid"))
+ma.path.2009a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
+star.data.2009a=read.csv(ma.path.2009a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2009)
+
+ma.path.2009b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_summary.csv",sep="")
+star.data.2009b=read.csv(ma.path.2009b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contract_id","org_type","org_name","org_marketing","partc_score"))
+
+
 
 
 ## Read in yearly data
