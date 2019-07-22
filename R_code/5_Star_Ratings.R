@@ -1,25 +1,22 @@
 ##############################################################################
-## Read in market pentration data */
+## Read in MA star rating data */
 ##############################################################################
+source(paste(path.code,"\\rating_variables.R",sep=""),local=TRUE,echo=FALSE)
+
+## Assign yearly datasets
+ma.path.2008=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
+star.data.2008=read_csv(ma.path.2008,skip=4,col_names=rating.vars.2008)
+
+star.data.2008=read.csv(ma.path.2008,skip=3,stringsAsFactors=FALSE)
 
 
-#########################################################################
-## Set local "month lists" to identify different files relevant for each year
-## Month lists differ by year just in case you work with data that are only available
-## in a fraction of a year, which often happens for new data as new monthly releases
-## are made. Some data sources are also only available in certain years.
-#########################################################################
-
-monthlist_2008=c("06","07","08","09","10", "11", "12")
-monthlist_2010=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2011=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2012=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2013=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2014=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2015=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
+ma.path.2008b=paste(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(N-W).csv",sep="")
+ma.data.2008b=read.csv(ma.path.2008b,skip=5,stringsAsFactors=FALSE,col.names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
+                                                                               "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
+                                                                               "planid","segmentid"))
 
 
-## Read in monthly files, append to yearly file, fill in missing info, and collapse down to yearly file
+## Read in yearly data
 for (y in 2008:2015) {
   monthlist=get(paste("monthlist_",y,sep=""))
   step=0
