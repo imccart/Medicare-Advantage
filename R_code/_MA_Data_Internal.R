@@ -5,7 +5,7 @@
 ## Notes:         R file to build Medicare Advantage dataset
 ########################################################################################
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table)
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, plyr)
 
 #########################################################################
 ## First set all file/folder paths

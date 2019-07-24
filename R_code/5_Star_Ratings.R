@@ -3,7 +3,7 @@
 ##############################################################################
 source(paste(path.code,"\\rating_variables.R",sep=""),local=TRUE,echo=FALSE)
 
-## Assign yearly datasets
+## Assign yearly datasets and clean star rating information
 
 ## 2008
 ma.path.2008a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
@@ -18,6 +18,12 @@ star.data.2008b=read.csv(ma.path.2008b,skip=2,stringsAsFactors=FALSE,
 ## 2009
 ma.path.2009a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
 star.data.2009a=read.csv(ma.path.2009a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2009)
+star.data.2009a=as_tibble(sapply(star.data.2009a,mapvalues,
+                                 from=c("1 out of 5 stars","2 out of 5 stars","3 out of 5 stars",
+                                        "4 out of 5 stars","5 stars"), 
+                                 to=c("1","2","3","4","5")))
+
+
 
 ma.path.2009b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_summary.csv",sep="")
 star.data.2009b=read.csv(ma.path.2009b,skip=2,stringsAsFactors=FALSE,
