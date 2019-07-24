@@ -4,23 +4,91 @@
 source(paste(path.code,"\\rating_variables.R",sep=""),local=TRUE,echo=FALSE)
 
 ## Assign yearly datasets
+
+## 2008
 ma.path.2008a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
 star.data.2008a=read.csv(ma.path.2008a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2008)
 
 ma.path.2008b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2008\\2008_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv",sep="")
 star.data.2008b=read.csv(ma.path.2008b,skip=2,stringsAsFactors=FALSE,
-                         col.names=c("contract_id","org_name","healthy","getting_care",
+                         col.names=c("contractid","contract_name","healthy","getting_care",
                                      "timely_care","chronic","appeal","new_contract"))
 
 
+## 2009
 ma.path.2009a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
 star.data.2009a=read.csv(ma.path.2009a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2009)
 
 ma.path.2009b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_summary.csv",sep="")
 star.data.2009b=read.csv(ma.path.2009b,skip=2,stringsAsFactors=FALSE,
-                         col.names=c("contract_id","org_type","org_name","org_marketing","partc_score"))
+                         col.names=c("contractid","org_type","contract_name","org_marketing","partc_score"))
 
 
+
+## 2010
+ma.path.2010a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2010\\2010_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv",sep="")
+star.data.2010a=read.csv(ma.path.2010a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2010)
+
+ma.path.2010b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2010\\2010_Part_C_Report_Card_Master_Table_2009_11_30_summary.csv",sep="")
+star.data.2010b=read.csv(ma.path.2010b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contractid","org_type","contract_name","org_marketing","partc_score"))
+
+
+
+## 2011
+ma.path.2011a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2011\\2011_Part_C_Report_Card_Master_Table_2011_04_20_star.csv",sep="")
+star.data.2011a=read.csv(ma.path.2011a,skip=5,stringsAsFactors=FALSE,col.names=rating.vars.2011)
+
+ma.path.2011b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2011\\2011_Part_C_Report_Card_Master_Table_2011_04_20_summary.csv",sep="")
+star.data.2011b=read.csv(ma.path.2011b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contractid","org_type","contract_name","org_marketing","partc_lowstar",
+                                     "partc_score","partcd_score"))
+
+
+## 2012
+ma.path.2012a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2012 Fall\\2012_Part_C_Report_Card_Master_Table_2011_11_01_star.csv",sep="")
+star.data.2012a=read.csv(ma.path.2012a,skip=5,stringsAsFactors=FALSE,col.names=rating.vars.2012)
+
+ma.path.2012b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2012 Fall\\2012_Part_C_Report_Card_Master_Table_2011_11_01_summary.csv",sep="")
+star.data.2012b=read.csv(ma.path.2012b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contractid","org_type","org_parent","org_marketing",
+                                     "partc_score","partc_lowscore","partc_highscore",
+                                     "partcd_score","partcd_lowscore","partcd_highscore"))
+
+
+## 2013
+ma.path.2013a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2013 Fall\\2013_Part_C_Report_Card_Master_Table_2012_10_17_star.csv",sep="")
+star.data.2013a=read.csv(ma.path.2013a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2013)
+
+ma.path.2013b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2013 Fall\\2013_Part_C_Report_Card_Master_Table_2012_10_17_summary.csv",sep="")
+star.data.2013b=read.csv(ma.path.2013b,skip=2,stringsAsFactors=FALSE,
+                         col.names=c("contractid","org_type","org_marketing","contract_name",
+                                     "org_parent",
+                                     "partc_score","partc_lowscore","partc_highscore",
+                                     "partcd_score","partcd_lowscore","partcd_highscore"))
+
+
+## 2014
+ma.path.2014a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2014 Fall\\2014_Part_C_Report_Card_Master_Table_2013_10_17_stars.csv",sep="")
+star.data.2014a=read.csv(ma.path.2014a,skip=3,stringsAsFactors=FALSE,col.names=rating.vars.2014)
+
+ma.path.2014b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\Part C 2014 Fall\\2014_Part_C_Report_Card_Master_Table_2013_10_17_summary.csv",sep="")
+star.data.2014b=fread(ma.path.2014b,skip=2,stringsAsFactors=FALSE, select=c(1:9),
+                         col.names=c("contractid","org_type","org_marketing","contract_name",
+                                     "org_parent","snp","sanction",
+                                     "partc_score","partcd_score"))
+
+
+## 2015
+ma.path.2015a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2015 Fall\\2015_Report_Card_Master_Table_2014_10_03_stars.csv",sep="")
+star.data.2015a=fread(ma.path.2015a,skip=3,stringsAsFactors=FALSE,select=c(1:38),col.names=rating.vars.2015)
+
+
+ma.path.2015b=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2015 Fall\\2015_Report_Card_Master_Table_2014_10_03_summary.csv",sep="")
+star.data.2015b=fread(ma.path.2015b,skip=2,stringsAsFactors=FALSE, select=c(1:10),
+                      col.names=c("contractid","org_type","org_marketing","contract_name",
+                                  "org_parent","snp","sanction",
+                                  "partc_score","partdscore","partcd_score"))
 
 
 ## Read in yearly data
