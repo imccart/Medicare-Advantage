@@ -41,6 +41,7 @@ for (y in 2007:2011){
            risk_star35=NA, risk_star3=NA, risk_star25=NA,
            risk_bonus5=NA, risk_bonus35=NA, risk_bonus0=NA,
            Year=y)
+           risk_bonus5=NA, risk_bonus35=NA, risk_bonus0=NA)
   
   assign(paste("bench.data.",y,sep=""),bench.data)
 }
@@ -66,6 +67,7 @@ for (y in 2012:2014){
     mutate(aged_parta=NA, aged_partb=NA, risk_ab=NA,
            risk_bonus5=NA, risk_bonus35=NA, risk_bonus0=NA,
            Year=y)
+           risk_bonus5=NA, risk_bonus35=NA, risk_bonus0=NA)
   
   assign(paste("bench.data.",y,sep=""),bench.data)
 }
@@ -87,6 +89,7 @@ bench.data.2015 = bench.data.2015 %>%
          risk_star35=NA, risk_star3=NA, risk_star25=NA,
          aged_parta=NA, aged_partb=NA, risk_ab=NA,
          Year=2015)
+         aged_parta=NA, aged_partb=NA, risk_ab=NA)
 
 
 benchmark.final=rbind(bench.data.2007, bench.data.2008, bench.data.2009,
