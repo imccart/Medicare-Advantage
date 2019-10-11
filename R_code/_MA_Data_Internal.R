@@ -14,7 +14,7 @@ pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table
 #########################################################################
 ## First set all file/folder paths
 #########################################################################
-<<<<<<< HEAD
+
 ##path.code="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\R_code"
 ##path.data.final="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
 ##path.data.ma="C:\\Users\\immccar\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
@@ -25,18 +25,6 @@ path.code="D:\\CloudStation\\Professional\\Research Projects\\_Git\\Medicare-Adv
 path.data.final="D:\\CloudStation\\Professional\\Research Projects\\_Git\\Medicare-Advantage\\data"
 path.data.ma="D:\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
 path.data.ffs="D:\\CloudStation\\Professional\\Research Data\\Medicare FFS"
-=======
-path.code="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\R_code"
-path.data.final="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
-path.data.ma="C:\\Users\\immccar\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
-path.data.ffs="C:\\Users\\immccar\\CloudStation\\Professional\\Research Data\\Medicare FFS"
-
-
-##path.code="D:\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\R_code"
-##path.data.final="D:\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
-##path.data.ma="D:\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
-##path.data.ffs="D:\\CloudStation\\Professional\\Research Data\\Medicare FFS"
->>>>>>> c0e7a6dbf53a5f54d07795069780933cc1ed59a9
 
 
 #########################################################################
