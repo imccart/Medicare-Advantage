@@ -1,21 +1,23 @@
 ########################################################################################
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
-## Date Edited:   7/8/2019
+## Date Edited:   10/11/2019
 ## Notes:         R file to build Medicare Advantage dataset
 ########################################################################################
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl)
+pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
 
 #########################################################################
 ## First set all file/folder paths
 #########################################################################
 ##path.code="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\R_code"
-##path.data.final="C:\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
+##path.data.final="C:\\Users\\immccar\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
 ##path.data.ma="C:\\Users\\immccar\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
+##path.data.ffs="C:\\Users\\immccar\\CloudStation\\Professional\\Research Data\\Medicare FFS"
 
-path.code="D:\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\R_code"
-path.data.final="D:\\CloudStation\\Professional\\Research Projects\\_Git\\medicare-advantage\\data"
+
+path.code="D:\\CloudStation\\Professional\\Research Projects\\_Git\\Medicare-Advantage\\R_code"
+path.data.final="D:\\CloudStation\\Professional\\Research Projects\\_Git\\Medicare-Advantage\\data"
 path.data.ma="D:\\CloudStation\\Professional\\Research Data\\Medicare Advantage"
 path.data.ffs="D:\\CloudStation\\Professional\\Research Data\\Medicare FFS"
 
@@ -25,7 +27,7 @@ path.data.ffs="D:\\CloudStation\\Professional\\Research Data\\Medicare FFS"
 #########################################################################
 source(paste(path.code,"\\1_Plan_data.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"\\2_Plan_Characteristics.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\3_Serivce_Areas.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"\\3_Service_Areas.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"\\4_Penetration_Files.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"\\5_Star_Ratings.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"\\6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
@@ -36,22 +38,16 @@ source(paste(path.code,"\\8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
 #########################################################################
 ## Organize final data
 #########################################################################
+final.data <- full.ma.data %>%
+  inner_join(contract.service.area %>% select(contractid, fips, year), by=c("contractid", "fips", "year")) %>%
+  filter(!state %in% c("VI","PR","MP","GU","AS","") &
+           snp == "Yes" &
+           (planid < 800 | planid >= 900) &
+           !is.na(planid) & !is.na(fips))
 
-use "${DATA_FINAL}Full_Contract_Plan_County.dta", clear
-merge m:1 contractid fips year using "${DATA_FINAL}Contract_Service_Area.dta", keep(master match)
+final.data <- final.data %>%
+  left_join(star.ratings,....)
 
-** Part C Approved Plans
-gen CMS_Approved=(_merge==3)
-drop _merge
-
-** Drop special needs plans and other specific observations
-drop if state=="VI" | state=="PR" | state=="MP" | state=="GU" | state=="AS"
-drop if snpplan=="Yes"
-drop if planid>=800 & planid<=899
-drop if planid==.
-drop if fips==.
-keep if CMS_Approved==1
-drop CMS_Approved
 
 ** Merge remaining files
 merge m:1 contractid year using "${DATA_FINAL}Star_Ratings.dta", keep(master match) nogenerate
