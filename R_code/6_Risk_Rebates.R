@@ -167,3 +167,4 @@ risk.rebate.final=rbind(risk.rebate.2006,risk.rebate.2007,risk.rebate.2008,
                         risk.rebate.2015)
 write_tsv(risk.rebate.final,path=paste(path.data.final,"\\Risk_Rebate.txt",sep=""),
           append=FALSE,col_names=TRUE)
+write_rds(risk.rebate.final,paste(path.data.final,"\\risk_rebate.rds",sep=""))

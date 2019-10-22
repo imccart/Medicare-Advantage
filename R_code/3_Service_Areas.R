@@ -71,3 +71,4 @@ for (y in 2006:2015) {
 contract.service.area=rbind(service.area.2006,service.area.2007,service.area.2008,service.area.2009,service.area.2010,
                             service.area.2011,service.area.2012,service.area.2013,service.area.2014,service.area.2015)
 write_tsv(contract.service.area,path=paste(path.data.final,"\\Contract_Service_Area.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(contract.service.area,paste(path.data.final,"\\contract_service_area.rds",sep=""))

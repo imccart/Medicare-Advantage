@@ -98,5 +98,5 @@ for (y in 2006:2015) {
 
 full.ma.data=rbind(plan.year.2006,plan.year.2007,plan.year.2008,plan.year.2009,plan.year.2010,
                    plan.year.2011,plan.year.2012,plan.year.2013,plan.year.2014,plan.year.2015)
-
 write_tsv(full.ma.data,path=paste(path.data.final,"\\Full_Contract_Plan_County.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(full.ma.data,paste(path.data.final,"\\full_ma_data.rds",sep=""))

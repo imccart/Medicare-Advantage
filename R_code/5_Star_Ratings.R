@@ -1,5 +1,5 @@
 ##############################################################################
-## Read in MA star rating data */
+## Read in MA star rating data 
 ##############################################################################
 source(paste(path.code,"\\rating_variables.R",sep=""),local=TRUE,echo=FALSE)
 
@@ -25,6 +25,7 @@ star.data.2008 = star.data.2008a %>%
 ## 2009
 ma.path.2009a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2009\\2009_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv",sep="")
 star.data.2009a=read.csv(ma.path.2009a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2009)
+star.data.2009a=as_tibble(sapply(star.data.2009a,plyr::mapvalues,
 star.data.2009a=as_tibble(sapply(star.data.2009a,mapvalues,
                                  from=c("1 out of 5 stars","2 out of 5 stars","3 out of 5 stars",
                                         "4 out of 5 stars","5 stars"), 
@@ -38,6 +39,7 @@ star.data.2009b=read.csv(ma.path.2009b,skip=2,stringsAsFactors=FALSE,
                          col.names=c("contractid","org_type","contract_name","org_marketing","partc_score"))
 star.data.2009b = star.data.2009b %>%
   mutate(new_contract=ifelse(partc_score=="Plan too new to be measured",1,0)) %>%
+  mutate(partc_score=plyr::mapvalues(partc_score,
   mutate(partc_score=mapvalues(partc_score,
                                from=c("1 out of 5 stars","1.5 out of 5 stars",
                                       "2 out of 5 stars","2.5 out of 5 stars",
@@ -56,6 +58,7 @@ star.data.2009 = star.data.2009a %>%
 ## 2010
 ma.path.2010a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2010\\2010_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv",sep="")
 star.data.2010a=read.csv(ma.path.2010a,skip=4,stringsAsFactors=FALSE,col.names=rating.vars.2010)
+star.data.2010a=as_tibble(sapply(star.data.2010a,plyr::mapvalues,
 star.data.2010a=as_tibble(sapply(star.data.2010a,mapvalues,
                                  from=c("1 out of 5 stars","2 out of 5 stars","3 out of 5 stars",
                                         "4 out of 5 stars","5 stars"), 
@@ -71,6 +74,7 @@ star.data.2010b=read.csv(ma.path.2010b,skip=2,stringsAsFactors=FALSE,
                          col.names=c("contractid","org_type","contract_name","org_marketing","partc_score"))
 star.data.2010b = star.data.2010b %>%
   mutate(new_contract=ifelse(partc_score=="Plan too new to be measured",1,0)) %>%
+  mutate(partc_score=plyr::mapvalues(partc_score,
   mutate(partc_score=mapvalues(partc_score,
                                from=c("1 out of 5 stars","1.5 out of 5 stars",
                                       "2 out of 5 stars","2.5 out of 5 stars",
@@ -89,6 +93,7 @@ star.data.2010 = star.data.2010a %>%
 ## 2011
 ma.path.2011a=paste(path.data.ma,"\\MA Star Ratings\\Extracted Star Ratings\\2011\\2011_Part_C_Report_Card_Master_Table_2011_04_20_star.csv",sep="")
 star.data.2011a=read.csv(ma.path.2011a,skip=5,stringsAsFactors=FALSE,col.names=rating.vars.2011)
+star.data.2011a=as_tibble(sapply(star.data.2011a,plyr::mapvalues,
 star.data.2011a=as_tibble(sapply(star.data.2010a,mapvalues,
                                  from=c("1 stars","2 stars","3 stars",
                                         "4 stars","5 stars"), 
@@ -104,6 +109,7 @@ star.data.2011b=read.csv(ma.path.2011b,skip=2,stringsAsFactors=FALSE,
 star.data.2011b = star.data.2011b %>%
   mutate(new_contract=ifelse(partc_score=="Plan too new to be measured",1,
                              ifelse(partcd_score=="Plan too new to be measured",1,0))) %>%
+  mutate(partc_score=plyr::mapvalues(partc_score,
   mutate(partc_score=mapvalues(partc_score,
                                from=c("1 out of 5 stars","1.5 out of 5 stars",
                                       "2 out of 5 stars","2.5 out of 5 stars",
@@ -111,6 +117,7 @@ star.data.2011b = star.data.2011b %>%
                                       "4 out of 5 stars","4.5 out of 5 stars",
                                       "5 stars"), 
                                to=c("1","1.5","2","2.5","3","3.5","4","4.5","5"))) %>%
+  mutate(partcd_score=plyr::mapvalues(partcd_score,
   mutate(partcd_score=mapvalues(partcd_score,
                                from=c("1 out of 5 stars","1.5 out of 5 stars",
                                       "2 out of 5 stars","2.5 out of 5 stars",
@@ -146,6 +153,7 @@ star.data.2012b=read.csv(ma.path.2012b,skip=2,stringsAsFactors=FALSE,
 star.data.2012b = star.data.2012b %>%
   mutate(new_contract=ifelse(partc_score=="Plan too new to be measured",1,
                              ifelse(partcd_score=="Plan too new to be measured",1,0))) %>%
+  mutate(partc_score=plyr::mapvalues(partc_score,
   mutate(partc_score=mapvalues(partc_score,
                                from=c("1 out of 5 stars","1.5 out of 5 stars",
                                       "2 out of 5 stars","2.5 out of 5 stars",
@@ -153,6 +161,7 @@ star.data.2012b = star.data.2012b %>%
                                       "4 out of 5 stars","4.5 out of 5 stars",
                                       "5 stars"), 
                                to=c("1","1.5","2","2.5","3","3.5","4","4.5","5"))) %>%
+  mutate(partcd_score=plyr::mapvalues(partcd_score,
   mutate(partcd_score=mapvalues(partcd_score,
                                 from=c("1 out of 5 stars","1.5 out of 5 stars",
                                        "2 out of 5 stars","2.5 out of 5 stars",
@@ -250,6 +259,8 @@ star.data.2015 = star.data.2015a %>%
 
 
 
-star.ratings=rbind.fill(star.data.2008, star.data.2009, star.data.2010, star.data.2011,
+
+star.ratings=plyr::rbind.fill(star.data.2008, star.data.2009, star.data.2010, star.data.2011,
                    star.data.2012, star.data.2013, star.data.2014, star.data.2015)
 write_tsv(star.ratings,path=paste(path.data.final,"\\Star_Ratings.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(star.ratings,paste(path.data.final,"\\star_ratings.rds",sep=""))

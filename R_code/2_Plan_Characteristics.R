@@ -393,3 +393,4 @@ for (y in 2007:2015) {
 }
 
 write_tsv(plan.premiums,path=paste(path.data.final,"\\Plan_Premiums.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(plan.premiums,paste(path.data.final,"\\plan_premiums.rds",sep=""))
