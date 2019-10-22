@@ -47,12 +47,10 @@ final.data <- full.ma.data %>%
            !is.na(planid) & !is.na(fips))
 
 final.data <- final.data %>%
-  left_join(star.ratings,....)
+  left_join(star.ratings, by=c("contractid", "year")) %>%
+  left_join(ma.penetration, by=c("fips", "year"))
 
 
-** Merge remaining files
-merge m:1 contractid year using "${DATA_FINAL}Star_Ratings.dta", keep(master match) nogenerate
-merge m:1 fips year using "${DATA_FINAL}MA_Penetration.dta", keep(master match) nogenerate
 
 gen byte nonmiss=!mi(statename)
 sort state statename nonmiss

@@ -24,16 +24,16 @@ monthlist_2015=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11
 
 ## Read in monthly files, append to yearly file, fill in missing info, and collapse down to yearly file
 for (y in 2006:2015) {
-  monthlist=get(paste("monthlist_",y,sep=""))
+  monthlist=get(paste0("monthlist_",y))
   step=0
   for (m in monthlist) {
     step=step+1
     
     ## Pull service area data by contract/month
-    ma.path=paste(path.data.ma,"\\Monthly MA Contract Service Area\\Extracted Data\\MA_Cnty_SA_",y,"_",m,".csv",sep="")
-    service.area=read.csv(ma.path,col.names=c("contractid","org_name","org_type","plan_type","partial","eghp",
-                                              "ssa","fips","county","state","notes"),
-                          stringsAsFactors=FALSE)
+    ma.path=paste0(path.data.ma,"\\Monthly MA Contract Service Area\\Extracted Data\\MA_Cnty_SA_",y,"_",m,".csv")
+    service.area=read_csv(ma.path,
+                          col_names=c("contractid","org_name","org_type","plan_type","partial","eghp",
+                                      "ssa","fips","county","state","notes"))
     service.area = service.area %>%
       mutate(month=m, year=y)
     if (step==1) {

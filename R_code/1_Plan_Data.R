@@ -17,18 +17,33 @@ monthlist_2012=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11
 monthlist_2013=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 monthlist_2014=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 monthlist_2015=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2016=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2017=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
-monthlist_2018=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")
 
 
-for (y in 2006:2018) {
+for (y in 2006:2015) {
   monthlist=get(paste("monthlist_",y,sep=""))
   for (m in monthlist) {
     
     ## Basic contract/plan information
     ma.path=paste0(path.data.ma,"\\Monthly MA and PDP Enrollment by CPSC\\Monthly MA and PDP Enrollment by CPSC\\Extracted Data\\CPSC_Contract_Info_",y,"_",m,".csv")
-    contract.info=read_csv(ma.path,col_names=c("contractid","planid","org_type","plan_type","partd","snp","eghp","org_name","org_marketing_name","plan_name","parent_org","contract_date"))
+    contract.info=read_csv(ma.path,
+                           skip=1,
+                           col_names = c("contractid","planid","org_type","plan_type",
+                                         "partd","snp","eghp","org_name","org_marketing_name",
+                                         "plan_name","parent_org","contract_date"),
+                           col_types = cols(
+                             contractid = col_character(),
+                             planid = col_double(),
+                             org_type = col_character(),
+                             plan_type = col_character(),
+                             partd = col_character(),
+                             snp = col_character(),
+                             eghp = col_character(),
+                             org_name = col_character(),
+                             org_marketing_name = col_character(),
+                             plan_name = col_character(),
+                             parent_org = col_character(),
+                             contract_date = col_character()
+                           ))
 
     contract.info = contract.info %>%
       group_by(contractid, planid) %>%
@@ -40,21 +55,26 @@ for (y in 2006:2018) {
     
     ## Enrollments per plan
     ma.path=paste0(path.data.ma,"\\Monthly MA and PDP Enrollment by CPSC\\Monthly MA and PDP Enrollment by CPSC\\Extracted Data\\CPSC_Enrollment_Info_",y,"_",m,".csv")    
-    enroll.info=read_csv(ma.path,col.names=c("contractid","planid","ssa","fips","state","county","enrollment"))
+    enroll.info=read_csv(ma.path,
+                         skip=1,
+                         col_names = c("contractid","planid","ssa","fips","state","county","enrollment"),
+                         col_types = cols(
+                           contractid = col_character(),
+                           planid = col_double(),
+                           ssa = col_double(),
+                           fips = col_double(),
+                           state = col_character(),
+                           county = col_character(),
+                           enrollment = col_double()
+                         ),na="*")
     
-    enroll.info = enroll.info %>%
-      mutate(enrollment=replace(enrollment,enrollment=="*",NA)) %>%
-      as.data.frame()
-    
-    enroll.info = enroll.info %>%
-      mutate(enrollment=as.numeric(enrollment))
 
     ## Merge contract info with enrollment info
     plan.data = contract.info %>%
       left_join(enroll.info, by=c("contractid", "planid")) %>%
       mutate(month=as.numeric(m),year=y)
     
-    assign(paste("plan.data.",y,".",m,sep=""),plan.data)
+    assign(paste0("plan.data.",y,".",m),plan.data)
   }
   
   ## Append monthly enrollment info for each year
@@ -101,7 +121,6 @@ for (y in 2006:2018) {
 }
 
 full.ma.data=rbind(plan.year.2006,plan.year.2007,plan.year.2008,plan.year.2009,plan.year.2010,
-                   plan.year.2011,plan.year.2012,plan.year.2013,plan.year.2014,plan.year.2015,
-                   plan.year.2016,plan.year.2017,plan.year.2018)
+                   plan.year.2011,plan.year.2012,plan.year.2013,plan.year.2014,plan.year.2015)
 write_tsv(full.ma.data,path=paste(path.data.final,"\\Full_Contract_Plan_County.txt",sep=""),append=FALSE,col_names=TRUE)
 write_rds(full.ma.data,paste(path.data.final,"\\full_ma_data.rds",sep=""))

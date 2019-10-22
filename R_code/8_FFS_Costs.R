@@ -3,15 +3,15 @@
 ##############################################################################
 
 ## Assign yearly file paths
-ffs.path.2007=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\Aged07.csv",sep="")
-ffs.path.2008=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\AGED08.csv",sep="")
-ffs.path.2009=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged09.csv",sep="")
-ffs.path.2010=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged10.csv",sep="")
-ffs.path.2011=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged11.csv",sep="")
-ffs.path.2012=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged12.csv",sep="")
-ffs.path.2013=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged13.csv",sep="")
-ffs.path.2014=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged14.csv",sep="")
-ffs.path.2015=paste(path.data.ffs,"\\FFS Costs\\Extracted Data\\FFS15.xlsx",sep="")
+ffs.path.2007=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\Aged07.csv")
+ffs.path.2008=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\AGED08.csv")
+ffs.path.2009=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged09.csv")
+ffs.path.2010=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged10.csv")
+ffs.path.2011=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged11.csv")
+ffs.path.2012=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged12.csv")
+ffs.path.2013=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged13.csv")
+ffs.path.2014=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged14.csv")
+ffs.path.2015=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\FFS15.xlsx")
 
 drops=array(dim=c(9,2))
 drops[,1]=c(2007:2015)
@@ -21,7 +21,7 @@ drops[,2]=c(5,4,7,7,2,2,2,2,2)
 ## Years 2007-2008
 for (y in 2007:2008){
   d=drops[which(drops[,1]==y),2]
-  ffs.data=read_csv(get(paste("ffs.path.",y,sep="")),skip=d,
+  ffs.data=read_csv(get(paste0("ffs.path.",y)),skip=d,
                       col_names=c("state","ssa","county_name","parta_enroll",
                                   "parta_reimb","parta_percap","parta_reimb_unadj",
                                   "parta_percap_unadj","parta_ime","parta_dsh",
@@ -33,14 +33,16 @@ for (y in 2007:2008){
            partb_enroll,partb_reimb,mean_risk) %>%
     mutate(year=y)
   
-  assign(paste("ffs.costs.",y,sep=""),ffs.costs)
+  assign(paste0("ffs.costs.",y),ffs.costs)
   
 }
 
 ## Years 2009-2014
 for (y in 2009:2014){
   d=drops[which(drops[,1]==y),2]
-  ffs.data=read_csv(get(paste("ffs.path.",y,sep="")),col_names=FALSE,skip=d)
+  ffs.data=read_csv(get(paste0("ffs.path.",y)),
+                    skip=d,
+                    col_names=FALSE)
   ffs.data=ffs.data[,1:15]
   names(ffs.data) = c("ssa","state","county_name","parta_enroll",
               "parta_reimb","parta_percap","parta_reimb_unadj",
@@ -60,13 +62,14 @@ for (y in 2009:2014){
 
 ## 2015
 d=drops[which(drops[,1]==2015),2]
-ffs.data=read_xlsx(get(paste("ffs.path.",2015,sep="")),skip=d,
-                  col_names=c("ssa","state","county_name","parta_enroll",
-                              "parta_reimb","parta_percap","parta_reimb_unadj",
-                              "parta_percap_unadj","parta_ime","parta_dsh",
-                              "parta_gme","partb_enroll",
-                              "partb_reimb","partb_percap",
-                              "mean_risk"))
+ffs.data=read_xlsx(get(paste0("ffs.path.",2015)),
+                   skip=d,
+                   col_names=c("ssa","state","county_name","parta_enroll",
+                               "parta_reimb","parta_percap","parta_reimb_unadj",
+                               "parta_percap_unadj","parta_ime","parta_dsh",
+                               "parta_gme","partb_enroll",
+                               "partb_reimb","partb_percap",
+                               "mean_risk"))
                   
 ffs.costs <- ffs.data %>%
   select(ssa,state,county_name,parta_enroll,parta_reimb,
