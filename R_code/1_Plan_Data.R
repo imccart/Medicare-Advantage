@@ -20,7 +20,7 @@ monthlist_2015=c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11
 
 
 for (y in 2006:2015) {
-  monthlist=get(paste("monthlist_",y,sep=""))
+  monthlist=get(paste0("monthlist_",y))
   for (m in monthlist) {
     
     ## Basic contract/plan information

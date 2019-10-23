@@ -28,30 +28,27 @@ for (y in 2008:2015) {
     
     ## Pull market penetration data by contract/month
     ma.path=paste0(path.data.ma,"\\Monthly MA State and County Penetration\\Extracted Data\\State_County_Penetration_MA_",y,"_",m,".csv")
-    pene.data=read_csv(ma.path,
+    pene.data=read_csv(ma.path,skip=1,
                        col_names=c("state","county","fips_state","fips_cnty","fips",
                                    "ssa_state","ssa_cnty","ssa","eligibles","enrolled",
-                                   "penetration"))
+                                   "penetration"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         fips_state = col_integer(),
+                         fips_cnty = col_integer(),
+                         fips = col_double(),
+                         ssa_state = col_integer(),
+                         ssa_cnty = col_integer(),
+                         ssa = col_double(),
+                         eligibles = col_number(),
+                         enrolled = col_number(),
+                         penetration = col_number()
+                       ), na="*")
     
     ## Add month and year data
     pene.data = pene.data %>%
       mutate(month=m, year=y)
-    
-    ## Clean data to remove characters and destring
-    pene.data = pene.data %>%
-      mutate(eligibles=replace(eligibles,eligibles=="*",NA)) %>%
-      mutate(enrolled=replace(enrolled,enrolled=="*",NA)) %>%
-      mutate(fips=replace(fips,fips=="UK",NA)) %>%
-      as.data.frame()
-
-    pene.data = pene.data %>%
-      mutate(eligibles=as.numeric(str_replace_all(eligibles,'\\,',''))) %>%
-      mutate(enrolled=as.numeric(str_replace_all(enrolled,'\\,','')))
-    
-    pene.data = pene.data %>%
-      mutate(eligibles=as.numeric(eligibles)) %>%
-      mutate(enrolled=as.numeric(enrolled)) %>%
-      mutate(fips=as.numeric(fips))
     
     if (step==1) {
       ma.penetration=pene.data

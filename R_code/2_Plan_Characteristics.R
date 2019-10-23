@@ -8,7 +8,25 @@ ma.data.2007=read_csv(ma.path.2007,
                       skip=4,
                       col_names=c("state","county","org_name","plan_name","plan_type","premium","drug_premium","partd_deductible",
                                   "drug_type","gap_coverage","variable_drug_copay","drug_type_detail","demo_type","contractid",
-                                  "planid","segmentid"))
+                                  "planid","segmentid"),
+                      col_types = cols(
+                        state = col_character(),
+                        county = col_character(),
+                        org_name = col_character(),
+                        plan_name = col_character(),
+                        plan_type = col_character(),
+                        premium = col_number(),
+                        drug_premium = col_number(),
+                        partd_deductible = col_number(),
+                        drug_type = col_character(),
+                        gap_coverage = col_character(),
+                        variable_drug_copay = col_character(),
+                        drug_type_detail = col_character(),
+                        demo_type = col_character(),
+                        contractid = col_character(),
+                        planid = col_double(),
+                        segmentid = col_double()
+                      ))
 
 macd.path.2007=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\PartCD\\2007\\Medicare Part D 2007 Plan Report 12-06-06.xls")
 macd.data.2007=read_xls(macd.path.2007,
@@ -17,9 +35,8 @@ macd.data.2007=read_xls(macd.path.2007,
                                     "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
                                     "national_pdp","partd_rein_demo","partd_rein_demo_type","premium_partc",
                                     "premium_partd_basic","premium_partd_supp","premium_partd_total",
-                                    "pard_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
+                                    "partd_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
                                     "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
-
 
 ## Raw 2008 data
 ma.path.2008a=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(A-M).csv")
@@ -27,14 +44,48 @@ ma.data.2008a=read_csv(ma.path.2008a,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid"))
+                                   "planid","segmentid"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double()
+                       ))
+
 
 ma.path.2008b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2008LandscapeSourceData_MA_09_25_07(N-W).csv")
 ma.data.2008b=read_csv(ma.path.2008b,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid"))
+                                   "planid","segmentid"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double()
+                       ))
+
 
 ma.data.2008 = rbind(ma.data.2008a,ma.data.2008b)
 
@@ -71,14 +122,48 @@ ma.data.2009a=read_csv(ma.path.2009a,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid"))
+                                   "planid","segmentid"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double()
+                       ))
+
 
 ma.path.2009b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2009LandscapeSourceData_MA_11_05_08_N_to_W.csv")
 ma.data.2009b=read_csv(ma.path.2009b,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid"))
+                                   "planid","segmentid"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double()
+                       ))
+
 ma.data.2009 = rbind(ma.data.2009a,ma.data.2009b)
 
 
@@ -112,7 +197,25 @@ ma.data.2010a=read_csv(ma.path.2010a,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid","moop"))
+                                   "planid","segmentid","moop"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character()
+                       ))
+
 
 
 ma.path.2010b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2010LandscapeSourceData_MA_12_01_09_N_to_W.csv")
@@ -120,7 +223,24 @@ ma.data.2010b=read_csv(ma.path.2010b,
                        skip=5,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","demo_type","contractid",
-                                   "planid","segmentid","moop"))
+                                   "planid","segmentid","moop"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         demo_type = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character()
+                       ))
 ma.data.2010 = rbind(ma.data.2010a,ma.data.2010b)
 
 
@@ -157,14 +277,49 @@ ma.data.2011a=read_csv(ma.path.2011a,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","free_preventive_care"))
+                                   "planid","segmentid","moop","free_preventive_care"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         free_preventive_care = col_character()
+                       ))
+
 
 ma.path.2011b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2011LandscapeSourceData_MA_12_17_10_NtoW.csv")
 ma.data.2011b=read_csv(ma.path.2011b,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","free_preventive_care"))
+                                   "planid","segmentid","moop","free_preventive_care"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         free_preventive_care = col_character()
+                       ))
 ma.data.2011 = rbind(ma.data.2011a,ma.data.2011b)
 
 
@@ -203,7 +358,25 @@ ma.data.2012a=read_csv(ma.path.2012a,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
+
 
 
 ma.path.2012b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2012LandscapeSourceData_MA_3_08_12_NtoW.csv")
@@ -211,7 +384,24 @@ ma.data.2012b=read_csv(ma.path.2012b,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
 ma.data.2012 = rbind(ma.data.2012a,ma.data.2012b)
 
 
@@ -249,14 +439,50 @@ ma.data.2013a=read_csv(ma.path.2013a,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
+
 
 ma.path.2013b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2013LandscapeSource file MA_NtoW 11212012.csv")
 ma.data.2013b=read_csv(ma.path.2013b,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
+
 ma.data.2013 = rbind(ma.data.2013a,ma.data.2013b)
 
 
@@ -293,14 +519,50 @@ ma.data.2014a=read_csv(ma.path.2014a,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
+
 
 ma.path.2014b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2014LandscapeSource file MA_NtoW 05292014.csv")
 ma.data.2014b=read_csv(ma.path.2014b,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
+
 ma.data.2014 = rbind(ma.data.2014a,ma.data.2014b)
 
 
@@ -336,14 +598,48 @@ ma.data.2015a=read_csv(ma.path.2015a,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
 
 ma.path.2015b=paste0(path.data.ma,"\\MA Plan Characteristics\\Extracted Data\\2015LandscapeSource file MA_NtoW 11042014.csv")
 ma.data.2015b=read_csv(ma.path.2015b,
                        skip=6,
                        col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
                                    "drug_type","gap_coverage","drug_type_detail","contractid",
-                                   "planid","segmentid","moop","star_rating"))
+                                   "planid","segmentid","moop","star_rating"),
+                       col_types = cols(
+                         state = col_character(),
+                         county = col_character(),
+                         org_name = col_character(),
+                         plan_name = col_character(),
+                         plan_type = col_character(),
+                         premium = col_number(),
+                         partd_deductible = col_number(),
+                         drug_type = col_character(),
+                         gap_coverage = col_character(),
+                         drug_type_detail = col_character(),
+                         contractid = col_character(),
+                         planid = col_double(),
+                         segmentid = col_double(),
+                         moop = col_character(),
+                         star_rating = col_character()
+                       ))
 ma.data.2015 = rbind(ma.data.2015a,ma.data.2015b)
 
 
@@ -376,14 +672,9 @@ macd.data.2015 = rbind(macd.data.2015a,macd.data.2015b)
 for (y in 2007:2015) {
 
   ############ CLEAN MA-Only Data #####################
-  ma.data=get(paste("ma.data.",y,sep=""))
+  ma.data=get(paste0("ma.data.",y))
   ma.data = ma.data %>%
-    mutate(planid=as.numeric(planid)) %>%
     select(contractid, planid, state, county, premium)
-
-  ## Remove dollar signs and assign as numeric variables
-  ma.data = ma.data %>%
-    mutate(premium=as.numeric(str_replace_all(premium,'\\$','')))
 
   ## Fill in missing plan info (by contract, plan, state, and county)
   ma.data = ma.data %>%
@@ -401,11 +692,11 @@ for (y in 2007:2015) {
 
     
   ############ CLEAN MA-PD Data #####################
-  macd.data=get(paste("macd.data.",y,sep=""))
+  macd.data=get(paste0("macd.data.",y))
   macd.data = macd.data %>% 
-    mutate(planid=as.numeric(planid)) %>%
     select(contractid, planid, state, county, premium_partc, premium_partd_basic, 
-           premium_partd_supp, premium_partd_total, partd_deductible)
+           premium_partd_supp, premium_partd_total, partd_deductible) %>%
+    mutate(planid=as.numeric(planid))
   
   macd.data = macd.data %>%
     group_by(contractid, planid, state, county) %>%
@@ -422,7 +713,7 @@ for (y in 2007:2015) {
 
   ## Merge Part D info to Part C info
   ma.macd.data = ma.data %>%
-    left_join(macd.data, by=c("contractid", "planid", "state", "county")) %>%
+    full_join(macd.data, by=c("contractid", "planid", "state", "county")) %>%
     mutate(year=y)
   
   if (y==2007) {

@@ -145,7 +145,7 @@ for (y in 2006:2015) {
               ~as.numeric(str_replace_all(.,'\\$',''))) %>%
     mutate(planid=as.numeric(planid), year=y) %>%
     select(contractid, planid, contract_name, plan_type, riskscore_partc,
-           payment_partc, rebate_partc)
+           payment_partc, rebate_partc, year)
     
 
   risk.rebate.b=get(paste("risk.rebate.",y,"b",sep="")) %>%

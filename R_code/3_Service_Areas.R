@@ -31,9 +31,21 @@ for (y in 2006:2015) {
     
     ## Pull service area data by contract/month
     ma.path=paste0(path.data.ma,"\\Monthly MA Contract Service Area\\Extracted Data\\MA_Cnty_SA_",y,"_",m,".csv")
-    service.area=read_csv(ma.path,
+    service.area=read_csv(ma.path,skip=1,
                           col_names=c("contractid","org_name","org_type","plan_type","partial","eghp",
-                                      "ssa","fips","county","state","notes"))
+                                      "ssa","fips","county","state","notes"),
+                          col_types = cols(
+                            contractid = col_character(),
+                            org_name = col_character(),
+                            org_type = col_character(),
+                            plan_type = col_character(),
+                            partial = col_logical(),
+                            eghp = col_character(),
+                            ssa = col_double(),
+                            fips = col_double(),
+                            county = col_character(),
+                            notes = col_character()
+                          ), na='*')
     service.area = service.area %>%
       mutate(month=m, year=y)
     if (step==1) {
