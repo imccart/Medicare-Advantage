@@ -18,7 +18,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
    R script to organize CPSC enrollment data is available here: [1_Plan_Data.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/1_Plan_Data.R)
    
 
-2. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/)
+2. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/index)
 
    The MA Landscape Files provide data on several plan characteristics. Note that there are separate folders for stand-along prescription drug plans (PDPs), special needs plans (SNPs), MA plans, and MA+PD plans. The accompanying code files focus only on MA and MA+PD plans. Also note that another source for similar information is in the Plan Benefits Data files. Those files are more comprehensive but also significantly harder to work with. I've found the landscape files to have all of the most important information, as well as being much more accessible.
    
