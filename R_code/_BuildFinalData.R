@@ -11,11 +11,7 @@ pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table
 ## First set all file/folder paths
 #########################################################################
 
-path.code=<your file name>
-path.data.final=...
-path.data.ma=...
-path.data.ffs=...
-
+source('R_code/paths.R')
 
 #########################################################################
 ## Build plan-level dataset
