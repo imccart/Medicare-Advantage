@@ -30,7 +30,7 @@ for (y in 2006:2015) {
     step=step+1
     
     ## Pull service area data by contract/month
-    ma.path=paste0(path.data.ma,"\\Monthly MA Contract Service Area\\Extracted Data\\MA_Cnty_SA_",y,"_",m,".csv")
+    ma.path=paste0(path.data.ma,"/Monthly MA Contract Service Area/Extracted Data/MA_Cnty_SA_",y,"_",m,".csv")
     service.area=read_csv(ma.path,skip=1,
                           col_names=c("contractid","org_name","org_type","plan_type","partial","eghp",
                                       "ssa","fips","county","state","notes"),
@@ -82,5 +82,5 @@ for (y in 2006:2015) {
 
 contract.service.area=rbind(service.area.2006,service.area.2007,service.area.2008,service.area.2009,service.area.2010,
                             service.area.2011,service.area.2012,service.area.2013,service.area.2014,service.area.2015)
-write_tsv(contract.service.area,path=paste(path.data.final,"\\Contract_Service_Area.txt",sep=""),append=FALSE,col_names=TRUE)
-write_rds(contract.service.area,paste(path.data.final,"\\contract_service_area.rds",sep=""))
+write_tsv(contract.service.area,path=paste(path.data.final,"/Contract_Service_Area.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(contract.service.area,paste(path.data.final,"/contract_service_area.rds",sep=""))

@@ -1,7 +1,7 @@
 ########################################################################################
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
-## Date Edited:   10/11/2019
+## Date Edited:   1/4/2022
 ## Notes:         R file to build Medicare Advantage dataset
 ########################################################################################
 if (!require("pacman")) install.packages("pacman")
@@ -16,14 +16,14 @@ source('R_code/paths.R')
 #########################################################################
 ## Build plan-level dataset
 #########################################################################
-source(paste(path.code,"\\1_Plan_data.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\2_Plan_Characteristics.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\3_Service_Areas.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\4_Penetration_Files.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\5_Star_Ratings.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\7_MA_Benchmark.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"\\8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/1_Plan_Data.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/2_Plan_Characteristics.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/3_Service_Areas.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/4_Penetration_Files.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/5_Star_Ratings.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/7_MA_Benchmark.R",sep=""),local=TRUE,echo=FALSE)
+source(paste(path.code,"/8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
 
 
 #########################################################################
@@ -120,8 +120,8 @@ final.data <- final.data %>%
     TRUE ~ NA_real_
   ))
 
-write_tsv(final.data,path=paste(path.data.final,"\\MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
-write_rds(final.data,paste(path.data.final,"\\ma_data.rds",sep=""))
+write_tsv(final.data,path=paste(path.data.final,"/MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(final.data,paste(path.data.final,"/ma_data.rds",sep=""))
 
 
 

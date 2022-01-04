@@ -3,15 +3,15 @@
 ##############################################################################
 
 ## Assign yearly file paths
-ffs.path.2007=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\Aged07.csv")
-ffs.path.2008=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\AGED08.csv")
-ffs.path.2009=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged09.csv")
-ffs.path.2010=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged10.csv")
-ffs.path.2011=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged11.csv")
-ffs.path.2012=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged12.csv")
-ffs.path.2013=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged13.csv")
-ffs.path.2014=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\Aged Only\\aged14.csv")
-ffs.path.2015=paste0(path.data.ffs,"\\FFS Costs\\Extracted Data\\FFS15.xlsx")
+ffs.path.2007=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/Aged07.csv")
+ffs.path.2008=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/AGED08.csv")
+ffs.path.2009=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged09.csv")
+ffs.path.2010=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged10.csv")
+ffs.path.2011=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged11.csv")
+ffs.path.2012=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged12.csv")
+ffs.path.2013=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged13.csv")
+ffs.path.2014=paste0(path.data.ffs,"/FFS Costs/Extracted Data/Aged Only/aged14.csv")
+ffs.path.2015=paste0(path.data.ffs,"/FFS Costs/Extracted Data/FFS15.xlsx")
 
 drops=array(dim=c(9,2))
 drops[,1]=c(2007:2015)
@@ -110,6 +110,6 @@ ffs.costs.final=rbind(ffs.costs.2007, ffs.costs.2008, ffs.costs.2009,
                       ffs.costs.2010, ffs.costs.2011, ffs.costs.2012,
                       ffs.costs.2013, ffs.costs.2014, ffs.costs.2015)
 
-write_tsv(ffs.costs.final,path=paste(path.data.final,"\\FFS_Costs.txt",sep=""),
+write_tsv(ffs.costs.final,path=paste(path.data.final,"/FFS_Costs.txt",sep=""),
           append=FALSE,col_names=TRUE)
-write_rds(ffs.costs.final,paste(path.data.final,"\\ffs_costs.rds",sep=""))
+write_rds(ffs.costs.final,paste(path.data.final,"/ffs_costs.rds",sep=""))

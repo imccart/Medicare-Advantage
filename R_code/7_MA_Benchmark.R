@@ -3,15 +3,15 @@
 ##############################################################################
 
 ## Assign yearly file paths
-bench.path.2007=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2007\\countyrate2007.csv")
-bench.path.2008=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2008\\countyrate2008.csv")
-bench.path.2009=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2009\\countyrate2009.csv")
-bench.path.2010=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2010\\CountyRate2010.csv")
-bench.path.2011=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2011\\CountyRate2011.csv")
-bench.path.2012=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2012\\CountyRate2012.csv")
-bench.path.2013=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2013\\CountyRate2013.csv")
-bench.path.2014=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2014\\CountyRate2014.csv")
-bench.path.2015=paste0(path.data.ma,"\\MA Benchmarks\\ratebook2015\\CSV\\CountyRate2015.csv")
+bench.path.2007=paste0(path.data.ma,"/MA Benchmarks/ratebook2007/countyrate2007.csv")
+bench.path.2008=paste0(path.data.ma,"/MA Benchmarks/ratebook2008/countyrate2008.csv")
+bench.path.2009=paste0(path.data.ma,"/MA Benchmarks/ratebook2009/countyrate2009.csv")
+bench.path.2010=paste0(path.data.ma,"/MA Benchmarks/ratebook2010/CountyRate2010.csv")
+bench.path.2011=paste0(path.data.ma,"/MA Benchmarks/ratebook2011/CountyRate2011.csv")
+bench.path.2012=paste0(path.data.ma,"/MA Benchmarks/ratebook2012/CountyRate2012.csv")
+bench.path.2013=paste0(path.data.ma,"/MA Benchmarks/ratebook2013/CountyRate2013.csv")
+bench.path.2014=paste0(path.data.ma,"/MA Benchmarks/ratebook2014/CountyRate2014.csv")
+bench.path.2015=paste0(path.data.ma,"/MA Benchmarks/ratebook2015/CSV/CountyRate2015.csv")
 
 ## Assign number of rows to drop in each CSV (they are all different because why not :))
 drops=array(dim=c(9,2))
@@ -113,6 +113,6 @@ bench.data.2015 = bench.data.2015 %>%
 benchmark.final=rbind(bench.data.2007, bench.data.2008, bench.data.2009,
                       bench.data.2010, bench.data.2011, bench.data.2012,
                       bench.data.2013, bench.data.2014, bench.data.2015)
-write_tsv(benchmark.final,path=paste(path.data.final,"\\MA_Benchmark.txt",sep=""),
+write_tsv(benchmark.final,path=paste(path.data.final,"/MA_Benchmark.txt",sep=""),
           append=FALSE,col_names=TRUE)
-write_rds(benchmark.final,paste(path.data.final,"\\ma_benchmark.rds",sep=""))
+write_rds(benchmark.final,paste(path.data.final,"/ma_benchmark.rds",sep=""))

@@ -24,7 +24,7 @@ for (y in 2006:2015) {
   for (m in monthlist) {
     
     ## Basic contract/plan information
-    ma.path=paste0(path.data.ma,"\\Monthly MA and PDP Enrollment by CPSC\\Monthly MA and PDP Enrollment by CPSC\\Extracted Data\\CPSC_Contract_Info_",y,"_",m,".csv")
+    ma.path=paste0(path.data.ma,"/Monthly MA and PDP Enrollment by CPSC/Monthly MA and PDP Enrollment by CPSC/Extracted Data/CPSC_Contract_Info_",y,"_",m,".csv")
     contract.info=read_csv(ma.path,
                            skip=1,
                            col_names = c("contractid","planid","org_type","plan_type",
@@ -54,7 +54,7 @@ for (y in 2006:2015) {
       select(-id_count)
     
     ## Enrollments per plan
-    ma.path=paste0(path.data.ma,"\\Monthly MA and PDP Enrollment by CPSC\\Monthly MA and PDP Enrollment by CPSC\\Extracted Data\\CPSC_Enrollment_Info_",y,"_",m,".csv")    
+    ma.path=paste0(path.data.ma,"/Monthly MA and PDP Enrollment by CPSC/Monthly MA and PDP Enrollment by CPSC/Extracted Data/CPSC_Enrollment_Info_",y,"_",m,".csv")    
     enroll.info=read_csv(ma.path,
                          skip=1,
                          col_names = c("contractid","planid","ssa","fips","state","county","enrollment"),
@@ -74,19 +74,17 @@ for (y in 2006:2015) {
       left_join(enroll.info, by=c("contractid", "planid")) %>%
       mutate(month=as.numeric(m),year=y)
     
-    assign(paste0("plan.data.",y,".",m),plan.data)
+    assign(paste0("plan.data.",m),plan.data)
   }
   
   ## Append monthly enrollment info for each year
-  step=0
-  for (m in monthlist) {
-    step=step+1
-    assign(paste0("plan.month.",step),get(paste0("plan.data.",y,".",m)))
-    if (step==1) {
-      plan.month=plan.month.1
-    } else {
-      plan.month=rbind(plan.month,get(paste0("plan.month.",step)))
-    }
+  if (y==2006) {
+    plan.month=rbind(plan.data.07, plan.data.08, plan.data.09, plan.data.10,
+                     plan.data.11, plan.data.12)
+  } else {
+    plan.month=rbind(plan.data.01, plan.data.02, plan.data.03, plan.data.04,
+                     plan.data.05, plan.data.06, plan.data.07, plan.data.08, 
+                     plan.data.09, plan.data.10, plan.data.11, plan.data.12)
   }
   
   ## Fill in missing fips codes (by state and county)
@@ -116,11 +114,11 @@ for (y in 2006:2015) {
               eghp=last(eghp),org_name=last(org_name),org_marketing_name=last(org_marketing_name),
               plan_name=last(plan_name),parent_org=last(parent_org),contract_date=last(contract_date),
               year=last(year))
-    
-  assign(paste0("plan.year.",y),plan.year)
+  
+  write_rds(plan.year,paste0(path.data.final,"/ma_data_",y,".rds"))
 }
 
 full.ma.data=rbind(plan.year.2006,plan.year.2007,plan.year.2008,plan.year.2009,plan.year.2010,
                    plan.year.2011,plan.year.2012,plan.year.2013,plan.year.2014,plan.year.2015)
-write_tsv(full.ma.data,path=paste(path.data.final,"\\Full_Contract_Plan_County.txt",sep=""),append=FALSE,col_names=TRUE)
-write_rds(full.ma.data,paste(path.data.final,"\\full_ma_data.rds",sep=""))
+write_tsv(full.ma.data,path=paste(path.data.final,"/Full_Contract_Plan_County.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(full.ma.data,paste(path.data.final,"/full_ma_data.rds",sep=""))
