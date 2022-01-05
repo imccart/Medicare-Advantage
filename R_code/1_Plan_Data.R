@@ -120,7 +120,7 @@ for (y in 2006:2015) {
 
 full.ma.data <- readRDS(paste0(path.data.final,"/ma_data_2006.rds"))
 for (y in 2007:2015) {
-  full.ma.data <- rbind(full.ma.data, paste0(path.data.final,"/ma_data_",y,".rds"))
+  full.ma.data <- rbind(full.ma.data,readRDS(paste0(path.data.final,"/ma_data_",y,".rds")))
 }
 
 write_tsv(full.ma.data,path=paste(path.data.final,"/Full_Contract_Plan_County.txt",sep=""),append=FALSE,col_names=TRUE)
