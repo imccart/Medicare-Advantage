@@ -35,7 +35,8 @@ star.ratings <- read_rds("data/star_ratings.rds")
 ma.penetration.data <- read_rds("data/ma_penetration.rds")
 plan.premiums <- read_rds("data/plan_premiums.rds")
 risk.rebate.final <- read_rds("data/risk_rebate.rds")
-benchmark.final <- read_rds("data/ma_benchmark.rds")
+benchmark.final <- read_rds("data/ma_benchmark.rds") %>%
+  mutate(ssa=as.double(ssa))
 ffs.costs.final <- read_rds("data/ffs_costs.rds")
 
 final.data <- full.ma.data %>%
@@ -129,7 +130,7 @@ final.data <- final.data %>%
     TRUE ~ NA_real_
   ))
 
-write_tsv(final.data,path=paste(path.data.final,"/Final_MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
+write_tsv(final.data,file=paste(path.data.final,"/Final_MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
 write_rds(final.data,paste(path.data.final,"/final_ma_data.rds",sep=""))
 
 
