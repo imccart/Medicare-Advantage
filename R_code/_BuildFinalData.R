@@ -29,6 +29,15 @@ source(paste(path.code,"/8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
 #########################################################################
 ## Organize final data
 #########################################################################
+full.ma.data <- read_rds("data/full_ma_data.rds")
+contract.service.area <- read_rds("data/contract_service_area.rds")
+star.ratings <- read_rds("data/star_ratings.rds")
+ma.penetration.data <- read_rds("data/ma_penetration.rds")
+plan.premiums <- read_rds("data/plan_premiums.rds")
+risk.rebate.final <- read_rds("data/risk_rebate.rds")
+benchmark.final <- read_rds("data/ma_benchmark.rds")
+ffs.costs.final <- read_rds("data/ffs_costs.rds")
+
 final.data <- full.ma.data %>%
   inner_join(contract.service.area %>% 
                select(contractid, fips, year), 
@@ -120,8 +129,8 @@ final.data <- final.data %>%
     TRUE ~ NA_real_
   ))
 
-write_tsv(final.data,path=paste(path.data.final,"/MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
-write_rds(final.data,paste(path.data.final,"/ma_data.rds",sep=""))
+write_tsv(final.data,path=paste(path.data.final,"/Final_MA_Data.txt",sep=""),append=FALSE,col_names=TRUE)
+write_rds(final.data,paste(path.data.final,"/final_ma_data.rds",sep=""))
 
 
 

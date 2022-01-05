@@ -110,6 +110,6 @@ ffs.costs.final=rbind(ffs.costs.2007, ffs.costs.2008, ffs.costs.2009,
                       ffs.costs.2010, ffs.costs.2011, ffs.costs.2012,
                       ffs.costs.2013, ffs.costs.2014, ffs.costs.2015)
 
-write_tsv(ffs.costs.final,path=paste(path.data.final,"/FFS_Costs.txt",sep=""),
+write_tsv(ffs.costs.final,file=paste(path.data.final,"/FFS_Costs.txt",sep=""),
           append=FALSE,col_names=TRUE)
 write_rds(ffs.costs.final,paste(path.data.final,"/ffs_costs.rds",sep=""))

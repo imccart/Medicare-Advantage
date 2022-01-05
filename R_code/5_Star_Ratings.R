@@ -143,7 +143,7 @@ star.data.2011 <- star.data.2011a %>%
 
 
 ## 2012
-ma.path.2012a <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2012 Fall/2012_Part_C_Report_Card_Master_Table_2011_11_01_star.csv")
+ma.path.2012a <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2012 Fall/2012_Part_C_Report_Card_Master_Table_2011_11_01_Star.csv")
 star.data.2012a <- read_csv(ma.path.2012a,
                          skip=5,
                          col_names=rating.vars.2012)
@@ -152,7 +152,7 @@ star.data.2012a <- star.data.2012a %>%
             as.numeric)
 
 
-ma.path.2012b <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2012 Fall/2012_Part_C_Report_Card_Master_Table_2011_11_01_summary.csv")
+ma.path.2012b <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2012 Fall/2012_Part_C_Report_Card_Master_Table_2011_11_01_Summary.csv")
 star.data.2012b <- read_csv(ma.path.2012b,
                          skip=2,
                          col_names=c("contractid","org_type","org_parent","org_marketing",
@@ -188,7 +188,7 @@ star.data.2012 <- star.data.2012a %>%
 
 
 ## 2013
-ma.path.2013a <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2013 Fall/2013_Part_C_Report_Card_Master_Table_2012_10_17_star.csv")
+ma.path.2013a <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2013 Fall/2013_Part_C_Report_Card_Master_Table_2012_10_17_Star.csv")
 star.data.2013a <- read_csv(ma.path.2013a,
                          skip=4,
                          col_names=rating.vars.2013)
@@ -196,7 +196,7 @@ star.data.2013a <- star.data.2013a %>%
   mutate_at(vars(-one_of("contractid","org_type","contract_name","org_marketing","org_parent")),
             as.numeric)
 
-ma.path.2013b <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2013 Fall/2013_Part_C_Report_Card_Master_Table_2012_10_17_summary.csv")
+ma.path.2013b <- paste0(path.data.ma,"/MA Star Ratings/Extracted Star Ratings/Part C 2013 Fall/2013_Part_C_Report_Card_Master_Table_2012_10_17_Summary.csv")
 star.data.2013b <- read_csv(ma.path.2013b,
                          skip=2,
                          col_names=c("contractid","org_type","org_marketing","contract_name",
