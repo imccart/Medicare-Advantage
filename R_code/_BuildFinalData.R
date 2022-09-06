@@ -1,29 +1,38 @@
-########################################################################################
+# Meta --------------------------------------------------------------------
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
 ## Date Edited:   1/4/2022
 ## Notes:         R file to build Medicare Advantage dataset
-########################################################################################
+
+
+# Preliminaries -----------------------------------------------------------
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table, gdata)
 
-#########################################################################
-## First set all file/folder paths
-#########################################################################
+## functions
+source("R_code/fn_plan_characteristics.R")
 
-source('R_code/paths.R')
 
-#########################################################################
-## Build plan-level dataset
-#########################################################################
-source(paste(path.code,"/1_Plan_Data.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"/2_Plan_Characteristics.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"/3_Service_Areas.R",sep=""),local=TRUE,echo=FALSE)
+
+# Import data -------------------------------------------------------------
+
+for (y in 2007:2007) {
+  source("R_code/1_plan-data.R")   
+  source("R_code/2_service-area.R")
+  source(paste0("R_code/3_plan-characteristics-",y,".R"))
+}
+
+
+
 source(paste(path.code,"/4_Penetration_Files.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/5_Star_Ratings.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/7_MA_Benchmark.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
+
+
+
+# Tidy data ---------------------------------------------------------------
 
 
 #########################################################################
