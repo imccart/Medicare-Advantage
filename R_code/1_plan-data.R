@@ -92,7 +92,7 @@ plan.year <- plan.year %>%
   fill(org_type,org_name,org_marketing_name,parent_org)
     
 ## Collapse from monthly data to yearly
-plan.year <- plan.year %>%
+final.plans <- plan.year %>%
   group_by(contractid, planid, fips, year) %>%
   arrange(contractid, planid, fips, month) %>%
   summarize(avg_enrollment=mean(enrollment),sd_enrollment=sd(enrollment),

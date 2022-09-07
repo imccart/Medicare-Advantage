@@ -75,5 +75,5 @@ mapd.data.b <- read_xls(mapd.path.b,
 
 mapd.data <- rbind(mapd.data.a,mapd.data.b)
 
-plan.premiums <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data)
+final.landscape <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data)
 

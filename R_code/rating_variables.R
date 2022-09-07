@@ -1,7 +1,7 @@
 ########################################################################################
 ## Author:        Ian McCarthy
 ## Date Created:  3/12/2019
-## Date Edited:   3/12/2019
+## Date Edited:   9/7/2022
 ## Notes:         Input file to assign global lists for rating variable names in each year
 ########################################################################################
 
@@ -344,7 +344,12 @@ rating.vars.2015=c("contractid",
   
   
 ## 2016 Rating variable names
-rating.vars.2016=c("breastcancer_screen",
+rating.vars.2016=c("contractid",
+                   "org_type",
+                   "contract_name",
+                   "org_marketing",
+                   "org_parent",  
+                   "breastcancer_screen",
                    "rectalcancer_screen",
                    "flu_vaccine",
                    "physical_health",
@@ -381,7 +386,12 @@ rating.vars.2016=c("breastcancer_screen",
   
   
 ## 2017 Rating variable names
-rating.vars.2017=c("breastcancer_screen",
+rating.vars.2017=c("contractid",
+                   "org_type",
+                   "contract_name",
+                   "org_marketing",
+                   "org_parent",  
+                   "breastcancer_screen",
                    "rectalcancer_screen",
                    "flu_vaccine",
                    "physical_health",
@@ -413,12 +423,17 @@ rating.vars.2017=c("breastcancer_screen",
                    "appeals_timely",
                    "appeals_review",
                    "ttyt_available")
-                   
+
                    
   
   
 ## 2018 Rating variable names
-rating.vars.2018=c("breastcancer_screen",
+rating.vars.2018=c("contractid",
+                   "org_type",
+                   "contract_name",
+                   "org_marketing",
+                   "org_parent",  
+                   "breastcancer_screen",
                    "rectalcancer_screen",
                    "flu_vaccine",
                    "physical_health",
@@ -452,5 +467,45 @@ rating.vars.2018=c("breastcancer_screen",
                    "appeals_timely",
                    "appeals_review",
                    "ttyt_available")
-                   
-                   
+
+## 2019 Rating variable names
+rating.vars.2019=c("contractid",
+                   "org_type",
+                   "contract_name",
+                   "org_marketing",
+                   "org_parent",  
+                   "breastcancer_screen",
+                   "rectalcancer_screen",
+                   "flu_vaccine",
+                   "physical_health",
+                   "mental_health",
+                   "physical_monitor",
+                   "bmi_assess",
+                   "specialneeds_manage",
+                   "older_medication",
+                   "older_function",
+                   "older_pain",
+                   "osteo_manage",
+                   "diabetes_eye",
+                   "diabetes_kidney",
+                   "diabetes_bloodsugar",
+                   "bloodpressure",
+                   "ra_manage",
+                   "falling",
+                   "bladder",
+                   "medication",
+                   "readmissions",
+                   "statin",
+                   "nodelays",
+                   "carequickly",
+                   "customer_service",
+                   "overallrating_care",
+                   "overallrating_plan",
+                   "coordination",
+                   "complaints_plan",
+                   "leave_plan",
+                   "access_problems",
+                   "improve",
+                   "appeals_timely",
+                   "appeals_review",
+                   "ttyt_available")                   

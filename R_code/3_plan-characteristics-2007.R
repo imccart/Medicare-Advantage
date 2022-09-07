@@ -36,5 +36,5 @@ mapd.data <- read_xls(mapd.path,
                                "partd_assist_full","nothing","partd_assist_75","partd_assist_50","partd_assist_25",
                                "partd_deductible","increase_coverage_limit","gap_coverage","gap_coverage_type"))
 
-plan.premiums <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data)
+final.landscape <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data)
 

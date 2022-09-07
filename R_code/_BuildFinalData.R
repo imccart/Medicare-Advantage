@@ -11,21 +11,20 @@ pacman::p_load(tidyverse, ggplot2, dplyr, lubridate, stringr, readxl, data.table
 
 ## functions
 source("R_code/fn_plan_characteristics.R")
-
+source("R_code/rating_variables.R")
 
 
 # Import data -------------------------------------------------------------
 
-for (y in 2007:2007) {
+for (y in 2008:2008) {
   source("R_code/1_plan-data.R")   
   source("R_code/2_service-area.R")
   source(paste0("R_code/3_plan-characteristics-",y,".R"))
+  source("R_code/4_penetration.R")  
+  source(paste0("R_code/5_star-ratings-",y,".R"))  
 }
 
 
-
-source(paste(path.code,"/4_Penetration_Files.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"/5_Star_Ratings.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/7_MA_Benchmark.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)

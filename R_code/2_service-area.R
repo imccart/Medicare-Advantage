@@ -68,6 +68,6 @@ service.year <- service.year %>%
   group_by(contractid, fips) %>%
   mutate(id_count=row_number())
   
-service.year <- service.year %>%
+final.service.area <- service.year %>%
   filter(id_count==1) %>%
   select(-c(id_count,month))
