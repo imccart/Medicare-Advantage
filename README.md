@@ -56,7 +56,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
 
 6. [CMS Payment Data](https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/Plan-Payment-Data.html)
 
-   CMS pays MA plans based on their bid and the county-level benchmarks. The final risk-adjusted payments (per beneficiary) are available on the CMS website. Unfortunately, the most recent data available are from 2015. Hopefully CMS will publish the 2016 and 2017 data soon.
+   CMS pays MA plans based on their bid and the county-level benchmarks. The final risk-adjusted payments (per beneficiary) are available on the CMS website.
    
    Stata .do file to organize the CMS payment and rebate data is available here:
    [6_Risk_Rebates.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/6_Risk_Rebates.do)

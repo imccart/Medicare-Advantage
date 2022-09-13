@@ -22,11 +22,11 @@ for (y in 2008:2008) {
   source(paste0("R_code/3_plan-characteristics-",y,".R"))
   source("R_code/4_penetration.R")  
   source(paste0("R_code/5_star-ratings-",y,".R"))  
+  source(paste0("R_code/6_risk-rebates-",y,".R"))
+  source(paste0("R_code/7_benchmarks-",y,".R"))  
 }
 
 
-source(paste(path.code,"/6_Risk_Rebates.R",sep=""),local=TRUE,echo=FALSE)
-source(paste(path.code,"/7_MA_Benchmark.R",sep=""),local=TRUE,echo=FALSE)
 source(paste(path.code,"/8_FFS_Costs.R",sep=""),local=TRUE,echo=FALSE)
 
 

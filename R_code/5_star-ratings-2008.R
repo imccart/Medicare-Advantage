@@ -16,5 +16,5 @@ star.data.b <- as_tibble(star.data.b) %>%
   select("contractid","new_contract")
 
 final.star.ratings <- (star.data.a %>% select(-new_contract)) %>%
-  left_join(star.data.8b, by=c("contractid")) %>%
+  left_join(star.data.b, by=c("contractid")) %>%
   mutate(year=2008)
