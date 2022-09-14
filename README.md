@@ -15,34 +15,35 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
    Stata .do file to organize CPSC enrollment data is available here: [1_Plan_Data.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/1_Plan_Data.do)
    
-   R script to organize CPSC enrollment data is available here: [1_Plan_Data.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/1_Plan_Data.R)
-   
-
-2. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/index)
-
-   The MA Landscape Files provide data on several plan characteristics. Note that there are separate folders for stand-along prescription drug plans (PDPs), special needs plans (SNPs), MA plans, and MA+PD plans. The accompanying code files focus only on MA and MA+PD plans. Also note that another source for similar information is in the Plan Benefits Data files. Those files are more comprehensive but also significantly harder to work with. I've found the landscape files to have all of the most important information, as well as being much more accessible.
-   
-   Stata .do file to organize plan premiums and other characteristics is available here: [2_Plan_Characteristics.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/2_Plan_Characteristics.do)
-   
-   R script to organize plan premiums and other characteristics is available here: [2_Plan_Characteristics.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/2_Plan_Characteristics.R)
+   R script to organize CPSC enrollment data is available here: [1_plan-data.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/1_plan-data.R)
 
 
-3. [Service Area Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-Contract-Service-Area-by-State-County.html)
+2. [Service Area Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-Contract-Service-Area-by-State-County.html)
 
    The MA Contract Service Area files provide a list of contracts and the counties in which the contracts are approved to operate. Contracts may have enrollees in counties for which the contract is not approved due, for example, to beneficiaries that moved from one county to another and maintained their old plan. The files are available monthly. I usually look across months in a year for any month in which a contract was approved. If such a month exists, then I flag that contract/county as "approved" and ultimately merge those approved contract/counties with other plan-level data.
    
-   Stata .do file to organize the service area files is available here: [3_Service_Areas.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/3_Service_Areas.do)
+   Stata .do file to organize the service area files is available here: [2_Service_Areas.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/2_Service_Areas.do)
 
-   R script to organize the service area files is available here: [3_Service_Areas.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/3_Service_Areas.R)
-
+   R script to organize the service area files is available here: [2_service-area.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/2_service-area.R)
    
+
+3. [Plan Characteristics](https://www.cms.gov/Medicare/Prescription-Drug-Coverage/PrescriptionDrugCovGenIn/index)
+
+   The MA Landscape Files provide data on several plan characteristics. Note that there are separate folders for stand-along prescription drug plans (PDPs), special needs plans (SNPs), MA plans, and MA+PD plans. The accompanying code files focus only on MA and MA+PD plans. Also note that another source for similar information is in the Plan Benefits Data files. Those files are more comprehensive but also significantly harder to work with. I've found the landscape files to have all of the most important information, as well as being much more accessible.
+   
+   Stata .do file to organize plan premiums and other characteristics is available here: [3_Plan_Characteristics.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/3_Plan_Characteristics.do)
+   
+   R scripts to organize plan premiums and other characteristics are available here. Due to slight differences in variables and file structures over time, I've created separate code files for each year of the data. Just change the year at the end of the file path for the correct code file, as needed: [3_plan-characteristics-2007.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/3_plan-characteristics-2007.R) through [3_plan-characteristics-2019.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/3_plan-characteristics-2019.R)
+
+
+
 4. [Penetration Files](https://www.cms.gov/Research-Statistics-Data-and-Systems/Statistics-Trends-and-Reports/MCRAdvPartDEnrolData/MA-State-County-Penetration.html)
 
    The MA penetration files provide the overall MA share for each county and month. These data are useful since plan-level enrollments are masked for plans with too few enrollees. As such, summing the plan-level enrollments will always underestimate the total number of MA enrollees in a county. The MA penetration files therefore provide a direct measure of the size of the MA market in each county. Note that these data are only available from CMS beginning in 2008.
    
    Stata .do file to organize the penetration files is available here: [4_Penetration_Files.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/4_Penetration_Files.do)
 
-   R script to organize the penetration files is available here: [4_Penetration_Files.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/4_Penetration_Files.R)
+   R script to organize the penetration files is available here: [4_penetration.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/4_penetration.R)
 
    
 5. [Star Ratings](https://www.cms.gov/medicare/prescription-drug-coverage/prescriptiondrugcovgenin/performancedata.html)
@@ -51,7 +52,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
    Stata .do file to organize the star ratings data is available here: [5_Star_Ratings.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/5_Star_Ratings.do)
 
-   R script to organize the star ratings data is available here: [5_Star_Ratings.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/5_Star_Ratings.R)
+   R scripts to organize the star ratings data are available here. Due to slight differences in variables and file structures over time, I've created separate code files for each year of the data. Just change the year at the end of the file path for the correct code file, as needed: [5_star-ratings-2008.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/5_star-ratings-2008.R) through [5_star-ratings-2019.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/5_star-ratings-2019.R)
 
 
 6. [CMS Payment Data](https://www.cms.gov/Medicare/Medicare-Advantage/Plan-Payment/Plan-Payment-Data.html)
@@ -61,8 +62,8 @@ Below, I introduce files in the order in which I've found things to be easiest t
    Stata .do file to organize the CMS payment and rebate data is available here:
    [6_Risk_Rebates.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/6_Risk_Rebates.do)
 
-   R script to organize the CMS payment and rebate data is available here:
-   [6_Risk_Rebates.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/6_Risk_Rebates.R)
+   R scripts to organize the CMS payment and rebate data are available here. Due to slight differences in variables and file structures over time, I've created separate code files for each year of the data. Just change the year at the end of the file path for the correct code file, as needed:
+   [6_risk-rebates-2006.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/6_risk-rebates-2006.R) through [6_risk-rebates-2019.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/6_risk-rebates-2019.R)
 
    
 7. [MA Benchmark Rates](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Ratebooks-and-Supporting-Data.html)
@@ -71,7 +72,7 @@ Below, I introduce files in the order in which I've found things to be easiest t
    
    Stata .do file to organize the benchmark rates is available here: [7_MA_Benchmark.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/7_MA_Benchmark.do)
 
-   R script to organize the benchmark rates is available here: [7_MA_Benchmark.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/7_MA_Benchmark.R)
+   R scripts to organize the benchmark rates are available here. Due to slight differences in variables and file structures over time, I've created separate code files for each year of the data. Just change the year at the end of the file path for the correct code file, as needed: [7_benchmarks-2007.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/7_benchmarks-2007.R) through [7_benchmarks-2019.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/7_benchmarks-2019.R)
 
    
 8. [CMS Fee-for-service Costs](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/FFS-Data.html)
@@ -81,5 +82,5 @@ Below, I introduce files in the order in which I've found things to be easiest t
    Stata .do file to organize the CMS FFS cost data is available here:
    [8_FFS_Costs.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/8_FFS_Costs.do)
    
-   R script to organize the CMS FFS cost data is available here:
-   [8_FFS_Costs.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/8_FFS_Costs.R)   
+   R scripts to organize the CMS FFS cost data are available here. Due to slight differences in variables and file structures over time, I've created separate code files for each year of the data. Just change the year at the end of the file path for the correct code file, as needed:
+   [8_ffs-costs-2007.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/8_ffs-costs-2007.R) through [8_ffs-costs-2019.R](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/8_ffs-costs-2019.R).

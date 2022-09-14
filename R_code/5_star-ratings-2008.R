@@ -13,8 +13,10 @@ star.data.b <- read_csv(ma.path.b,
                                      "timely_care","chronic","appeal","new_contract"))
 star.data.b <- as_tibble(star.data.b) %>%
   mutate(new_contract=replace(new_contract,is.na(new_contract),0)) %>%
-  select("contractid","new_contract")
+  select("contractid","new_contract") %>%
+  mutate(partc_score=NA_real_,
+         partcd_score=NA_real_)
 
-final.star.ratings <- (star.data.a %>% select(-new_contract)) %>%
+final.star.ratings <- star.data.a %>% select(-contract_name, -new_contract) %>%
   left_join(star.data.b, by=c("contractid")) %>%
   mutate(year=2008)

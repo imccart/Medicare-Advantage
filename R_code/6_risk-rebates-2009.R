@@ -27,7 +27,7 @@ risk.rebate.b=risk.rebate.b %>%
   select(contractid, planid, payment_partd, directsubsidy_partd, reinsurance_partd, costsharing_partd,
          riskscore_partd)
   
-risk.rebate = risk.rebate.a %>%
+final.risk.rebate = risk.rebate.a %>%
   left_join(risk.rebate.b, by=c("contractid","planid"))
 
   

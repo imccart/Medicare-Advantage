@@ -13,7 +13,7 @@ names(ffs.data) = c("ssa","state","county_name","parta_enroll",
                     "partb_reimb","partb_percap",
                     "mean_risk")  
 
-ffs.costs <- ffs.data %>%
+final.ffs.costs <- ffs.data %>%
   select(ssa,state,county_name,parta_enroll,parta_reimb,
          partb_enroll,partb_reimb,mean_risk) %>%
   mutate(year=2012,

@@ -30,7 +30,7 @@ ffs.data=read_csv("data/input/cms-ffs-costs/Extracted Data/Aged Only/Aged07.csv"
                   ), na="*")
 
 
-ffs.costs <- ffs.data %>%
+final.ffs.costs <- ffs.data %>%
   select(ssa,state,county_name,parta_enroll,parta_reimb,
          partb_enroll,partb_reimb,mean_risk) %>%
   mutate(year=2007)

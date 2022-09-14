@@ -7,8 +7,8 @@ bench.data=read_csv("data/input/benchmarks/ratebook2013/CountyRate2013.csv",
                                 "risk_star45","risk_star4","risk_star35",
                                 "risk_star3","risk_star25","esrd_ab"))
 
-bench.data = bench.data %>%
+final.benchmark = bench.data %>%
   select(ssa,risk_star5,risk_star45,risk_star4,risk_star35,risk_star3,risk_star25) %>%
-  mutate(aged_parta=NA, aged_partb=NA, risk_ab=NA,
-         risk_bonus5=NA, risk_bonus35=NA, risk_bonus0=NA,
+  mutate(aged_parta=NA_real_, aged_partb=NA_real_, risk_ab=NA_real_,
+         risk_bonus5=NA_real_, risk_bonus35=NA_real_, risk_bonus0=NA_real_,
          year=2013)
