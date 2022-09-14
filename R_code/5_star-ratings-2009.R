@@ -27,8 +27,10 @@ star.data.b <- star.data.b %>%
                                             "5 stars"), 
                                      to=c("1","1.5","2","2.5","3","3.5","4","4.5","5"))) %>%
   mutate(partc_score=as.numeric(partc_score)) %>%
-  select(contractid, new_contract, partc_score)
+  select(contractid, new_contract, partc_score) %>%
+  mutate(partcd_score=NA_real_)
 
-final.star.ratings <- star.data.a %>%
+final.star.ratings <- star.data.a %>% 
+  select(-contract_name, -org_type, -org_marketing) %>%
   left_join(star.data.b, by=c("contractid")) %>%
   mutate(year=2009)
