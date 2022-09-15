@@ -1,6 +1,7 @@
 library(readxl)
 library(dplyr)
 library(hablar)
+library(purrr)
 
 # Import data -------------------------------------------------------------
 file_name <- "PBP-Benefits-2001"
@@ -25,8 +26,8 @@ var_dict <- na.omit(read_excel(paste0(unzip_out_data.path,
 var_dict$NAME <- toupper(var_dict$NAME)  # Change to upper case to match
 
 ## Loop through all files to do the type conversion
+df_list = 
 for (i in txt_list){
-  print(i)
   df <- read.table(paste0(unzip_out_data.path, 
                                paste0("/", i)), 
                                header = TRUE, fill = TRUE, 
@@ -36,14 +37,24 @@ for (i in txt_list){
   
   df <-  df[,nzchar(colnames(df))] #redundant cols(eg "pbp_b1_inpat_hosp_df") 
 
-  name <- gsub("\\..*","",i)
+  name <- gsub(".txt","",i) #Get rid of the extension (.txt)
   var_dict_temp <- var_dict[var_dict$FILE == name, ]
   var_dict_temp <- split(var_dict_temp, var_dict_temp$TYPE)
  
-  df <- convert(df, num(var_dict_temp$NUM$NAME)) 
+  df <- convert(df, num(var_dict_temp$NUM$NAME))
   #Others are characters (default when import)
   
   df_name <- paste0(name, "_df")
   assign(df_name, df)
 }
 
+## Merging all the dataframes
+df_list = gsub(".txt","_df",txt_list) #Name of all dataframe
+#Find the common variables in all files for merging:
+common_cols = df_list %>%
+  map(~ eval(parse(text = .x)) %>%
+        names()) %>%
+  reduce(~ intersect(.x, .y))
+
+final.planb = Reduce(function(x, y) left_join(x, y, by=common_cols), 
+                     lapply(df_list,function(j) eval(parse(text=j))))
