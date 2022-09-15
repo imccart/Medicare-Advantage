@@ -2,8 +2,6 @@
 
 #' @param folder_name  name of the zip-folder on plan benefit info 
 #'                     (e.g. "PBP-Benefits-2001")
-#' @param dict_name name of the dictionary inside the zip-folder 
-#'                  (e.g. "pbp2002_dictionary.xls")
 
 planb.merge <- function(folder_name){
   
