@@ -1,7 +1,7 @@
 # Meta --------------------------------------------------------------------
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
-## Date Edited:   9/14/2022
+## Date Edited:   1/9/2023
 ## Notes:         R file to build Medicare Advantage dataset
 
 
@@ -14,9 +14,7 @@ source("R_code/fn_plan_characteristics.R")
 source("R_code/rating_variables.R")
 
 
-step=1
-for (y in 2008:2008) {
-  step=step+1
+for (y in 2008:2018) {
   
   # Import data -------------------------------------------------------------
   source("R_code/1_plan-data.R")   
@@ -120,9 +118,9 @@ for (y in 2008:2008) {
       TRUE ~ NA_real_
     ))
   
-  write_tsv(final.ma,file=paste0("data/output/ma_data_",y,".txt"), replace=TRUE)
+  write_tsv(final.ma,file=paste0("data/output/ma_data_",y,".txt"), append=FALSE)
 
-  if (step==1) {
+  if (y==2008) {
     final.ma.full <- final.ma
   } else {
     final.ma.full <- rbind(final.ma.full, final.ma)
@@ -131,4 +129,4 @@ for (y in 2008:2008) {
 }
 
 
-write_tsv(final.ma.full,file="data/output/ma_data_full.txt", replace=TRUE)
+write_tsv(final.ma.full,file="data/output/ma_data_full.txt", append=FALSE)
