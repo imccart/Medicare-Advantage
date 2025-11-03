@@ -1,5 +1,5 @@
 # Medicare Advantage
-This describes all of my primary Medicare Advantage (MA) datasets and code files. Project-specific uses of these data are treated as their own repositories and will be cited here over time. As always, this is a living document and changes regularly.
+This describes all of my primary Medicare Advantage (MA) datasets and code files. Project-specific uses of these data are treated as their own repositories and will be cited here over time. This is a living document and changes regularly.
 
 ## Master Do File
 Each of the relevant data sources are available individually and discussed in more detail below. Just scroll down to the [Raw Data Sources](https://github.com/imccart/Medicare-Advantage#raw-data-sources). All of these files can also be called as part of a master file, [_BuildFinalData.do](https://github.com/imccart/Medicare-Advantage/blob/master/stata_code/_BuildFinalData.do) for Stata and [_BuildFinalData.r](https://github.com/imccart/Medicare-Advantage/blob/master/R_code/_BuildFinalData.R) in R. I name these files so that they appear (by default) in Windows folders in a way that makes sense to me. So the master do file begins with an underscore, and the individual do files are numbered. This is just personal preference but helps me to keep things in order. 
