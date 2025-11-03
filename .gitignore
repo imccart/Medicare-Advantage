@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 data/
+logs/
+stata_code/_BuildFinalData_Internal.do
