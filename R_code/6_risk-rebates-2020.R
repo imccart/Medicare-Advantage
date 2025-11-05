@@ -1,16 +1,15 @@
 
 # Import data -------------------------------------------------------------
 
-ma.path.a <- "data/input/ma/cms-payment/2007/2007PartCPlanLevel2.xlsx"
-risk.rebate.a <- read_xlsx(ma.path.a,range="A4:H2572",
-                            col_names=c("contractid","planid","contract_name","plan_type",
-                                        "riskscore_partc","payment_partc","rebate_partc",
-                                        "msa_deposit_partc"))
-ma.path.b <- "data/input/ma/cms-payment/2007/2007PartDPlans2.xlsx"
-risk.rebate.b <- read_xlsx(ma.path.b,range="A4:H4066",
-                            col_names=c("contractid","planid","contract_name","plan_type",
-                                        "directsubsidy_partd","riskscore_partd","reinsurance_partd",
-                                        "costsharing_partd"))
+ma.path.a <- "data/input/ma/cms-payment/2020/2020PartCPlanLevel.xlsx"
+risk.rebate.a <- read_xlsx(ma.path.a,range="A4:G4135",sheet="result.html",
+                        col_names=c("contractid","planid","contract_name","plan_type",
+                                    "riskscore_partc","payment_partc","rebate_partc"))
+ma.path.b <- "data/input/ma/cms-payment/2020/2020PartDPlans.xlsx"
+risk.rebate.b <- read_xlsx(ma.path.b,range="A4:H5086",sheet="result.html",
+                        col_names=c("contractid","planid","contract_name","plan_type",
+                                    "directsubsidy_partd","riskscore_partd","reinsurance_partd",
+                                    "costsharing_partd"))
 
 
 risk.rebate.a <- risk.rebate.a %>%
@@ -18,7 +17,7 @@ risk.rebate.a <- risk.rebate.a %>%
     across(c(riskscore_partc, payment_partc, rebate_partc),
            ~ parse_number(as.character(.))),
     planid = as.numeric(planid),
-    year   = 2007
+    year   = 2020
   ) %>%
   select(contractid, planid, contract_name, plan_type,
          riskscore_partc, payment_partc, rebate_partc, year)    
@@ -33,8 +32,6 @@ risk.rebate.b <- risk.rebate.b %>%
   select(contractid, planid, payment_partd,
          directsubsidy_partd, reinsurance_partd, costsharing_partd,
          riskscore_partd)  
-      
+  
 final.risk.rebate <- risk.rebate.a %>%
   left_join(risk.rebate.b, by=c("contractid","planid"))
-
-  
