@@ -1,7 +1,7 @@
 
 # Import data -------------------------------------------------------------
 
-ma.path <- paste0("data/input/landscape/Extracted Data/2007 MA Landscape Source File 11-16-06.csv")
+ma.path <- paste0("data/input/ma/landscape/Extracted Data/2007 MA Landscape Source File 11-16-06.csv")
 ma.data <- read_csv(ma.path,
                  skip=4,
                  col_names=c("state","county","org_name","plan_name","plan_type","premium","drug_premium","partd_deductible",
@@ -26,7 +26,7 @@ ma.data <- read_csv(ma.path,
                    segmentid = col_double()
                  ))
 
-mapd.path <- paste0("data/input/landscape/Extracted Data/PartCD/2007/Medicare Part D 2007 Plan Report 12-06-06.xls")
+mapd.path <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2007/Medicare Part D 2007 Plan Report 12-06-06.xls")
 mapd.data <- read_xls(mapd.path,
                    range="A5:AC49252",
                    col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",

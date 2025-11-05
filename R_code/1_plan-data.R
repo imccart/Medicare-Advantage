@@ -1,105 +1,109 @@
+# Month list --------------------------------------------------------------
+y=2008
+monthlist <- if (y == 2006) sprintf("%02d", 7:12) else sprintf("%02d", 1:12)
 
-# Set month lists ---------------------------------------------------------
-
-#########################################################################
-## Set local "month lists" to identify different files relevant for each year
-## Month lists differ by year just in case you work with data that are only available
-## in a fraction of a year, which often happens for new data as new monthly releases
-## are made. Some data sources are also only available in certain years.
-#########################################################################
-
-if (y==2006) {
-  monthlist <- c("07", "08", "09", "10", "11", "12")
-} else {
-  monthlist <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12")  
+# Readers (quiet & typed) -------------------------------------------------
+read_contract <- function(path) {
+  read_csv(
+    path,
+    skip = 1,
+    col_names = c(
+      "contractid","planid","org_type","plan_type","partd","snp","eghp",
+      "org_name","org_marketing_name","plan_name","parent_org","contract_date"
+    ),
+    col_types = cols(
+      contractid = col_character(),
+      planid     = col_double(),
+      org_type   = col_character(),
+      plan_type  = col_character(),
+      partd      = col_character(),
+      snp        = col_character(),
+      eghp       = col_character(),
+      org_name   = col_character(),
+      org_marketing_name = col_character(),
+      plan_name  = col_character(),
+      parent_org = col_character(),
+      contract_date = col_character()
+    ),
+    show_col_types = FALSE,
+    progress = FALSE
+  )
 }
 
-# Import monthly data -----------------------------------------------------
-step <- 0
-for (m in monthlist) {
-  step <- step+1
-    
-  ## Basic contract/plan information
-  ma.path <- paste0("data/input/enrollment/Extracted Data/CPSC_Contract_Info_",y,"_",m,".csv")
-  contract.info <- read_csv(ma.path,
-                            skip=1,
-                            col_names = c("contractid","planid","org_type","plan_type",
-                                          "partd","snp","eghp","org_name","org_marketing_name",
-                                          "plan_name","parent_org","contract_date"),
-                            col_types = cols(
-                              contractid = col_character(),
-                              planid = col_double(),
-                              org_type = col_character(),
-                              plan_type = col_character(),
-                              partd = col_character(),
-                              snp = col_character(),
-                              eghp = col_character(),
-                              org_name = col_character(),
-                              org_marketing_name = col_character(),
-                              plan_name = col_character(),
-                              parent_org = col_character(),
-                              contract_date = col_character()
-                              ))
+read_enroll <- function(path) {
+  read_csv(
+    path,
+    skip = 1,
+    col_names = c("contractid","planid","ssa","fips","state","county","enrollment"),
+    col_types = cols(
+      contractid = col_character(),
+      planid     = col_double(),
+      ssa        = col_double(),
+      fips       = col_double(),
+      state      = col_character(),
+      county     = col_character(),
+      enrollment = col_double()
+    ),
+    na = "*",
+    show_col_types = FALSE,
+    progress = FALSE
+  )
+}
 
-  contract.info <- contract.info %>%
-    group_by(contractid, planid) %>%
-    mutate(id_count=row_number())
-    
-  contract.info <- contract.info %>%
-    filter(id_count==1) %>%
-    select(-id_count)
-    
-  ## Enrollments per plan
-  ma.path <- paste0("data/input/enrollment/Extracted Data/CPSC_Enrollment_Info_",y,"_",m,".csv")    
-  enroll.info <- read_csv(ma.path,
-                       skip=1,
-                       col_names = c("contractid","planid","ssa","fips","state","county","enrollment"),
-                       col_types = cols(
-                         contractid = col_character(),
-                         planid = col_double(),
-                         ssa = col_double(),
-                         fips = col_double(),
-                         state = col_character(),
-                         county = col_character(),
-                         enrollment = col_double()
-                       ),na="*")
-    
-  ## Merge contract info with enrollment info
-  plan.data <- contract.info %>%
-    left_join(enroll.info, by=c("contractid", "planid")) %>%
-    mutate(month=as.numeric(m),year=y)
+# One-month loader --------------------------------------------------------
+load_month <- function(m) {
+  c_path <- paste0("data/input/ma/enrollment/Extracted Data/CPSC_Contract_Info_", y, "_", m, ".csv")
+  e_path <- paste0("data/input/ma/enrollment/Extracted Data/CPSC_Enrollment_Info_", y, "_", m, ".csv")
 
-  if (step==1) {
-    plan.year <- plan.data
-  } else {
-    plan.year <- rbind(plan.year,plan.data)
-  }
-} 
+  contract.info <- read_contract(c_path) %>%
+    distinct(contractid, planid, .keep_all = TRUE)   
 
-## Fill in missing fips codes (by state and county)
-plan.year <- plan.year %>%
+  enroll.info <- read_enroll(e_path)
+
+  contract.info %>%
+    left_join(enroll.info, by = c("contractid","planid")) %>%
+    mutate(month = as.integer(m), year = y)
+}
+
+# Read all months, then tidy once ----------------------------------------
+
+plan.year <- map_dfr(monthlist, load_month) %>%
+  arrange(contractid, planid, state, county, month) %>%
   group_by(state, county) %>%
-  fill(fips)
-
-## Fill in missing plan characteristics by contract and plan id
-plan.year <- plan.year %>%
+  fill(fips, .direction = "downup") %>%                
+  ungroup() %>%
   group_by(contractid, planid) %>%
-  fill(plan_type, partd, snp, eghp, plan_name)
-  
-## Fill in missing contract characteristics by contractid
-plan.year <- plan.year %>%
+  fill(plan_type, partd, snp, eghp, plan_name, .direction = "downup") %>%
+  ungroup() %>%
   group_by(contractid) %>%
-  fill(org_type,org_name,org_marketing_name,parent_org)
-    
-## Collapse from monthly data to yearly
+  fill(org_type, org_name, org_marketing_name, parent_org, .direction = "downup") %>%
+  ungroup()
+
+
+# Collapse to yearly panel ------------------------------------------------
 final.plans <- plan.year %>%
   group_by(contractid, planid, fips, year) %>%
-  arrange(contractid, planid, fips, month) %>%
-  summarize(avg_enrollment=mean(enrollment),sd_enrollment=sd(enrollment),
-            min_enrollment=min(enrollment),max_enrollment=max(enrollment),
-            first_enrollment=first(enrollment),last_enrollment=last(enrollment),
-            state=last(state),county=last(county),org_type=last(org_type),
-            plan_type=last(plan_type),partd=last(partd),snp=last(snp),
-            eghp=last(eghp),org_name=last(org_name),org_marketing_name=last(org_marketing_name),
-            plan_name=last(plan_name),parent_org=last(parent_org),contract_date=last(contract_date),
-            year=last(year))
+  arrange(month, .by_group = TRUE) %>%
+  summarize(
+    n_nonmiss        = sum(!is.na(enrollment)),
+    avg_enrollment   = ifelse(n_nonmiss > 0, mean(enrollment, na.rm = TRUE), NA_real_),
+    sd_enrollment    = ifelse(n_nonmiss > 1, sd(enrollment, na.rm = TRUE), NA_real_),
+    min_enrollment   = ifelse(n_nonmiss > 0, min(enrollment, na.rm = TRUE), NA_real_),
+    max_enrollment   = ifelse(n_nonmiss > 0, max(enrollment, na.rm = TRUE), NA_real_),
+    first_enrollment = ifelse(n_nonmiss > 0, first(na.omit(enrollment)), NA_real_),
+    last_enrollment  = ifelse(n_nonmiss > 0,  last(na.omit(enrollment)), NA_real_),
+    state            = last(state),
+    county           = last(county),
+    org_type         = last(org_type),
+    plan_type        = last(plan_type),
+    partd            = last(partd),
+    snp              = last(snp),
+    eghp             = last(eghp),
+    org_name         = last(org_name),
+    org_marketing_name = last(org_marketing_name),
+    plan_name        = last(plan_name),
+    parent_org       = last(parent_org),
+    contract_date    = last(contract_date),
+    year             = last(year),
+    .groups = "drop"
+  )

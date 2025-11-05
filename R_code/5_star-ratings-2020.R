@@ -1,13 +1,13 @@
 
 # Import data -------------------------------------------------------------
 
-ma.path.a <- "data/input/ma/star-ratings/Extracted Star Ratings/2019 Fall/2019_Report_Card_Master_Table_2018_11_13_stars.csv"
+ma.path.a <- "data/input/ma/star-ratings/Extracted Star Ratings/2020/2020 Star Ratings Data Table - Measure Stars (Oct 21 2019).csv"
 star.data.a <- fread(
   ma.path.a,
   skip = 4,
   stringsAsFactors=FALSE,
-  select=c(1:40),
-  col.names=rating.vars.2019,
+  select=c(1:38),
+  col.names=rating.vars.2020,
   na = c("", "NA", "*")
 ) %>%
   mutate(across(
@@ -16,13 +16,13 @@ star.data.a <- fread(
   ))
 
 
-ma.path.b <- "data/input/ma/star-ratings/Extracted Star Ratings/2019 Fall/2019_Report_Card_Master_Table_2018_11_13_summary.csv"
+ma.path.b <- "data/input/ma/star-ratings/Extracted Star Ratings/2020/2020 Star Ratings Data Table - Summary Stars (Oct 21 2019).csv"
 star.data.b <- fread(
   ma.path.b,
   skip = 2,
   stringsAsFactors=FALSE, 
-  select=c(1:9),
-  col.names=c("contractid","org_type","org_marketing","contract_name", "org_parent","snp", "partc_score","partd_score","partcd_score"),
+  select=c(1:11),
+  col.names=c("contractid","org_type","org_marketing","contract_name","org_parent","snp","disaster_2017","disaster_2018","partc_score","partd_score","partcd_score"),
   na = c("", "NA", "*")
 ) %>%
   mutate(
@@ -35,4 +35,4 @@ star.data.b <- fread(
 final.star.ratings <- as_tibble(star.data.a) %>%
   select(-contract_name, -org_type, -org_marketing) %>%  
   left_join(star.data.b, by=c("contractid")) %>%
-  mutate(year=2019)
+  mutate(year=2020)

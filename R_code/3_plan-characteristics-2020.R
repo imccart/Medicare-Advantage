@@ -1,7 +1,7 @@
 
 # Import data -------------------------------------------------------------
 
-ma.path.a <- paste0("data/input/ma/landscape/Extracted Data/2017LandscapeSource file MA_AtoM 10182016.csv")
+ma.path.a <- paste0("data/input/ma/landscape/Extracted Data/2020LandscapeSource file MA_AtoM 10152019.csv")
 ma.data.a <- read_csv(ma.path.a,
                       skip=6,
                       col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
@@ -13,8 +13,8 @@ ma.data.a <- read_csv(ma.path.a,
                         org_name = col_character(),
                         plan_name = col_character(),
                         plan_type = col_character(),
-                        premium = col_number(),
-                        partd_deductible = col_number(),
+                        premium = col_character(),
+                        partd_deductible = col_character(),
                         drug_type = col_character(),
                         gap_coverage = col_character(),
                         drug_type_detail = col_character(),
@@ -23,10 +23,13 @@ ma.data.a <- read_csv(ma.path.a,
                         segmentid = col_double(),
                         moop = col_character(),
                         star_rating = col_character()
-                      ))
+                      )) %>%
+  mutate_at(c('premium','partd_deductible'), ~str_replace(.,"-","0")) %>%
+  mutate_at(c('premium','partd_deductible'), ~parse_number(.))
+  
 
 
-ma.path.b <- paste0("data/input/ma/landscape/Extracted Data/2017LandscapeSource file MA_NtoW 10182016.csv")
+ma.path.b <- paste0("data/input/ma/landscape/Extracted Data/2020LandscapeSource file MA_NtoW 10152019.csv")
 ma.data.b <- read_csv(ma.path.b,
                       skip=6,
                       col_names=c("state","county","org_name","plan_name","plan_type","premium","partd_deductible",
@@ -38,8 +41,8 @@ ma.data.b <- read_csv(ma.path.b,
                         org_name = col_character(),
                         plan_name = col_character(),
                         plan_type = col_character(),
-                        premium = col_number(),
-                        partd_deductible = col_number(),
+                        premium = col_character(),
+                        partd_deductible = col_character(),
                         drug_type = col_character(),
                         gap_coverage = col_character(),
                         drug_type_detail = col_character(),
@@ -48,14 +51,17 @@ ma.data.b <- read_csv(ma.path.b,
                         segmentid = col_double(),
                         moop = col_character(),
                         star_rating = col_character()
-                      ))
+                      )) %>%
+  mutate_at(c('premium','partd_deductible'), ~str_replace(.,"-","0")) %>%
+  mutate_at(c('premium','partd_deductible'), ~parse_number(.))
+
 
 ma.data <- rbind(ma.data.a,ma.data.b)
 
 
-mapd.path.a <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2017/Medicare Part D 2017 Plan Report 10182016.xls")
+mapd.path.a <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2020/Medicare Part D 2020 Plan Report 09032019 v2.xls")
 mapd.data.a <- read_xls(mapd.path.a,
-                        range="A5:Z17657",
+                        range="A5:Z27051",
                         sheet="Alabama to Montana",
                         col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
                                     "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",
@@ -67,9 +73,9 @@ mapd.data.a <- read_xls(mapd.path.a,
 
 
 
-mapd.path.b <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2017/Medicare Part D 2017 Plan Report 10182016.xls")
+mapd.path.b <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2020/Medicare Part D 2020 Plan Report 09032019 v2.xls")
 mapd.data.b <- read_xls(mapd.path.b,
-                        range="A5:Z20217",
+                        range="A5:Z31006",
                         sheet="Nebraska to Wyoming",
                         col_names=c("state","county","org_name","plan_name","contractid","planid","segmentid",
                                     "org_type","plan_type","snp","snp_type","benefit_type","below_benchmark",

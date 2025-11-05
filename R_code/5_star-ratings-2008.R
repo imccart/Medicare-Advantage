@@ -1,16 +1,19 @@
 
 # Import data -------------------------------------------------------------
 
-ma.path.a <- "data/input/star-ratings/Extracted Star Ratings/2008/2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv"
+ma.path.a <- "data/input/ma/star-ratings/Extracted Star Ratings/2008/2008_Part_C_Report_Card_Master_Table_2009_11_30_stars.csv"
 star.data.a <- read_csv(ma.path.a,
                          skip=4,
-                         col_names=rating.vars.2008)
+                         col_names=rating.vars.2008,
+                         na = c("", "NA", "*"))
 
-ma.path.b <- "data/input/star-ratings/Extracted Star Ratings/2008/2008_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv"
+ma.path.b <- "data/input/ma/star-ratings/Extracted Star Ratings/2008/2008_Part_C_Report_Card_Master_Table_2009_11_30_domain.csv"
 star.data.b <- read_csv(ma.path.b,
                          skip=2,
                          col_names=c("contractid","contract_name","healthy","getting_care",
-                                     "timely_care","chronic","appeal","new_contract"))
+                                     "timely_care","chronic","appeal","new_contract"),
+                         na = c("", "NA", "*"))
+
 star.data.b <- as_tibble(star.data.b) %>%
   mutate(new_contract=replace(new_contract,is.na(new_contract),0)) %>%
   select("contractid","new_contract") %>%
