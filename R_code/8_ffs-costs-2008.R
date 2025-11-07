@@ -1,7 +1,7 @@
 
 # Import data -------------------------------------------------------------
 
-ffs.data=read_csv("data/input/cms-ffs-costs/Extracted Data/Aged Only/AGED08.csv",
+ffs.data <- read_csv("data/input/ffs-costs/Extracted Data/Aged Only/AGED08.csv",
                   skip=4,
                   col_names=c("state","ssa","county_name","parta_enroll",
                               "parta_reimb","parta_percap","parta_reimb_unadj",
