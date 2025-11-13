@@ -1,4 +1,4 @@
-mapd.clean.merge <- function(ma.data, mapd.data) {
+mapd.clean.merge <- function(ma.data, mapd.data, y) {
   
   # Tidy MA-only data -------------------------------------------------------
   ma.data <- ma.data %>%

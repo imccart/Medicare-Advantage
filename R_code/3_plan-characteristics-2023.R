@@ -59,7 +59,7 @@ ma.data.b <- read_csv(ma.path.b,
 ma.data <- rbind(ma.data.a,ma.data.b)
 
 
-mapd.path.a <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2023/Medicare Part D 2023 Plan Report 10142022_Final.xls")
+mapd.path.a <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2023/Medicare Part D 2023 Plan Report  10142022_Final.xls")
 mapd.data.a <- read_xls(mapd.path.a,
                         range="A5:Z52121",
                         sheet="Alabama to Montana",
@@ -73,7 +73,7 @@ mapd.data.a <- read_xls(mapd.path.a,
 
 
 
-mapd.path.b <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2023/Medicare Part D 2023 Plan Report 10142022_Final.xls")
+mapd.path.b <- paste0("data/input/ma/landscape/Extracted Data/PartCD/2023/Medicare Part D 2023 Plan Report  10142022_Final.xls")
 mapd.data.b <- read_xls(mapd.path.b,
                         range="A5:Z53004",
                         sheet="Nebraska to Wyoming",
@@ -86,5 +86,5 @@ mapd.data.b <- read_xls(mapd.path.b,
                                     "gap_coverage"))
 mapd.data <- rbind(mapd.data.a,mapd.data.b)
 
-final.landscape <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data)
+final.landscape <- mapd.clean.merge(ma.data=ma.data, mapd.data=mapd.data, y)
 

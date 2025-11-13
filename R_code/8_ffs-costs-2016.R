@@ -1,7 +1,7 @@
 
 # Import data -------------------------------------------------------------
 
-ffs.data <- read_xlsx("data/input/cms-ffs-costs/Extracted Data/ffs2016/FFS16.xlsx",
+ffs.data <- read_xlsx("data/input/ffs-costs/Extracted Data/ffs2016/FFS16.xlsx",
                   skip=2,
                   col_names=c("ssa","state","county_name","parta_enroll",
                               "parta_reimb","parta_percap","parta_reimb_unadj",

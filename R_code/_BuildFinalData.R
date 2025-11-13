@@ -1,7 +1,7 @@
 # Meta --------------------------------------------------------------------
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
-## Date Edited:   1/9/2023
+## Date Edited:   11/12/2025
 ## Notes:         R file to build Medicare Advantage dataset
 
 
@@ -15,25 +15,39 @@ source("R_code/rating_variables.R")
 
 build_year_ma <- function(y) {
   
-  source("R_code/1_plan-data.R", local=TRUE)   
-  source("R_code/2_service-area.R", local=TRUE)
-  source(paste0("R_code/3_plan-characteristics-",y,".R"), local=TRUE)
-  source("R_code/4_penetration.R", local=TRUE)  
-  source(paste0("R_code/5_star-ratings-",y,".R"), local=TRUE)  
-  source(paste0("R_code/6_risk-rebates-",y,".R"), local=TRUE)
-  source(paste0("R_code/7_benchmarks-",y,".R"), local=TRUE)
-  source(paste0("R_code/8_ffs-costs-",y,".R"), local=TRUE)
-
-  # shorthand objects created by the sourced files
+  print("building plan data")
+  source("R_code/1_plan-data.R", local=TRUE)  
   fp   <- final.plans
+
+  print("building service area data")
+  source("R_code/2_service-area.R", local=TRUE)
   fsa  <- final.service.area
-  fsr  <- final.star.ratings
+
+  print("building plan characteristics data")
+  source(paste0("R_code/3_plan-characteristics-",y,".R"), local=TRUE)
+  fls <- final.landscape
+
+  print("building penetration data")
+  source("R_code/4_penetration.R", local=TRUE)
   fpen <- final.penetration
-  fls  <- final.landscape
+
+  print("building star ratings data")
+  source(paste0("R_code/5_star-ratings-",y,".R"), local=TRUE)
+  fsr  <- final.star.ratings
+
+  print("building risk rebates data")
+  source(paste0("R_code/6_risk-rebates-",y,".R"), local=TRUE)
   frr  <- final.risk.rebate
+
+  print("building benchmarks data")
+  source(paste0("R_code/7_benchmarks-",y,".R"), local=TRUE)
   fbm  <- final.benchmark
+
+  print("building ffs costs data")
+  source(paste0("R_code/8_ffs-costs-",y,".R"), local=TRUE)
   ffs  <- final.ffs.costs
 
+  print(paste0("finalizing ma data for year ",y))
   final.ma <- fp %>%
     inner_join(fsa %>% select(contractid, fips, year),
                by = c("contractid","fips","year")) %>%
@@ -102,7 +116,7 @@ build_year_ma <- function(y) {
 }
 
 
-years <- 2008:2009
+years <- 2008:2023
 final.ma.full <- map_dfr(years, ~{
   message("Building MA data for year: ", .x)
   build_year_ma(.x)
