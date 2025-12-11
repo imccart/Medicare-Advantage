@@ -123,4 +123,3 @@ final.ma.full <- map_dfr(years, ~{
 })
 
 write_tsv(final.ma.full, "data/output/ma_data_full.txt")
-
