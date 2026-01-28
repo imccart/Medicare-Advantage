@@ -1,7 +1,7 @@
 # Meta --------------------------------------------------------------------
 ## Author:        Ian McCarthy
 ## Date Created:  7/8/2019
-## Date Edited:   11/12/2025
+## Date Edited:   1/27/2026
 ## Notes:         R file to build Medicare Advantage dataset
 
 
@@ -25,7 +25,8 @@ build_year_ma <- function(y) {
 
   print("building plan characteristics data")
   source(paste0("R_code/3_plan-characteristics-",y,".R"), local=TRUE)
-  fls <- final.landscape
+  fls <- final.landscape %>%
+    mutate(state=str_to_lower(state))
 
   print("building penetration data")
   source("R_code/4_penetration.R", local=TRUE)
@@ -56,12 +57,13 @@ build_year_ma <- function(y) {
            (planid < 800 | planid >= 900),
            !is.na(planid), !is.na(fips)) %>%
     left_join(fsr, by = c("contractid","year")) %>%
-    left_join(fpen %>% ungroup() %>% rename(state_long = state, county_long = county),
+    left_join(fpen %>% ungroup() %>% rename(state_long = state, county_long = county) %>%
+              mutate(state_long=str_to_lower(state_long)),
               by = c("fips","year"))
 
   final.state <- final.ma %>%
     group_by(state) %>%
-    summarize(state_name = dplyr::last(state_long[!is.na(state_long)]), .groups = "drop")
+    summarize(state_name = last(state_long[!is.na(state_long)]), .groups = "drop")
 
   final.ma <- final.ma %>%
     left_join(final.state, by = "state") %>%
