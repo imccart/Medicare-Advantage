@@ -2,6 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+.claude/
+CLAUDE.md
 data/
 logs/
 stata_code/_BuildFinalData_Internal.do
