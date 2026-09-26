@@ -1,5 +1,6 @@
   # Month list --------------------------------------------------------------
   monthlist <- if (y == 2006) sprintf("%02d", 10:12) else sprintf("%02d", 1:12)
+  monthlist <- monthlist[file.exists(paste0("data/input/ma/service-area/Extracted Data/MA_Cnty_SA_", y, "_", monthlist, ".csv"))]
 
   # Reader ------------------------------------------------------------------
   read_service_area <- function(path) {

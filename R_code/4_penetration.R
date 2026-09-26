@@ -1,5 +1,6 @@
   # Month list --------------------------------------------------------------
   monthlist <- if (y == 2008) sprintf("%02d", 6:12) else sprintf("%02d", 1:12)
+  monthlist <- monthlist[file.exists(paste0("data/input/ma/penetration/Extracted Data/State_County_Penetration_MA_", y, "_", monthlist, ".csv"))]
 
   # Reader: read numerics as text, then parse --------------------------------
   read_penetration <- function(path) {

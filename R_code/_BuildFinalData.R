@@ -63,7 +63,9 @@ build_year_ma <- function(y) {
 
   final.state <- final.ma %>%
     group_by(state) %>%
-    summarize(state_name = last(state_long[!is.na(state_long)]), .groups = "drop")
+    summarize(state_name = if (any(!is.na(state_long))) last(state_long[!is.na(state_long)]) else NA_character_, .groups = "drop") %>%
+    mutate(state_name = coalesce(state_name,
+                                 str_to_lower(c(state.name, "District of Columbia")[match(state, c(state.abb, "DC"))])))
 
   final.ma <- final.ma %>%
     left_join(final.state, by = "state") %>%
@@ -118,7 +120,7 @@ build_year_ma <- function(y) {
 }
 
 
-years <- 2008:2023
+years <- 2008:2026
 final.ma.full <- map_dfr(years, ~{
   message("Building MA data for year: ", .x)
   build_year_ma(.x)
